@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+      "target": "ESNext",
+      "module": "ESNext",
+      "jsx": "react",
+      "strict": true,
+      "allowSyntheticDefaultImports": true,
+    },
+    "include": ["src/components", "custom.d.ts"]
+}
