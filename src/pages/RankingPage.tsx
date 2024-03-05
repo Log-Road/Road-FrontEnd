@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from "styled-components";
 import Header from "../components/Header"
-import ProjectBox from "../components/ProjectBox"
+import Project from "../components/Project"
 import List from "../components/List"
 import { colors } from "../styles/colors"
 
@@ -23,16 +23,19 @@ export default function RankingPage() {
                 </SelectWrap>
                 <Contents>
                     <ProjectWrap>
-                        <ProjectBox />
-                        <ProjectBox />
-                        <ProjectBox />
+                        <Project />
+                        <Project />
+                        <Project />
+                        <Project />
+                        <Project />
+                        <Project />
                     </ProjectWrap>
                     <Other>
                         <SubTitle>다른 대회 살펴보기</SubTitle>
                         <ListWrap>
-                            <List/>
-                            <List/>
-                            <List/>
+                            <List />
+                            <List />
+                            <List />
                         </ListWrap>
                     </Other>
                 </Contents>
@@ -43,9 +46,10 @@ export default function RankingPage() {
 
 const Container = styled.div`
 width: 100vw;
+max-height: 81.85em;
+overflow-y: auto;
 display: flex;
 flex-direction: column;
-justify-content: center;
 background-color: ${colors.Gray["gray 50"]};
 `
 
@@ -54,24 +58,24 @@ width: 85%;
 display: flex;
 flex-direction: column;
 justify-content: center;
-margin: 20px auto;
+margin: 1.25em auto;
 `;
 
 const SelectWrap = styled.div`
 display: flex;
-gap: 28px;
-margin: 8px 0px 24px;
+gap: 1.75em;
+margin: 0.5em 0 1.5em;
 `
 
 const Title = styled.p`
 font-family: PretendardBold;
-font-size: 24px;
+font-size: 1.5em;
 line-height: 140%;
 `
 
 const Text = styled.p`
 font-family: PretendardBold;
-font-size: 24px;
+font-size: 1.5em;
 line-height: 140%;
 color: ${colors.gray2};
 `
@@ -87,26 +91,26 @@ width: 80%;
 display: flex;
 flex-direction: row;
 flex-wrap: wrap;
-gap: 30px;
+gap: 1.88em;
 `
 
 const Other = styled.div`
-width: 387px;
-height: 590px;
-padding: 24px 28px;
-border-radius: 16px;
+width: 24.19em;
+height: 36.88em;
+padding: 1.50em 1.75em;
+border-radius: 1em;
 background-color: #fff;
 `
 
 const SubTitle = styled.p`
 font-family: PretendardBold;
-font-size: 18px;
+font-size: 1.13em;
 line-height: 140%;
-margin-bottom: 28px;
+margin-bottom: 1.75em;
 `
 
 const ListWrap = styled.div`
 display: flex;
 flex-direction: column;
-gap: 16px;
+gap: 1em;
 `

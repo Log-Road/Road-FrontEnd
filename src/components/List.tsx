@@ -20,8 +20,8 @@ export default function List() {
 }
 
 const Container = styled.div`
-  width: 331px;
-  height: 40px;
+  width: 20.69em;
+  height: 2.5em;
 `;
 
 const Content = styled.div`
@@ -31,12 +31,12 @@ const Content = styled.div`
 
 const Text = styled.p`
   font-family: PretendardRegular;
-  font-size: 16px;
+  font-size: 1em;
   line-height: 140%;
 `;
 
 const Line = styled.hr`
   width: 100%;
-  height: 1px;
+  height: 0.06em;
   color: ${colors.Gray["gray 100"]};
 `;
