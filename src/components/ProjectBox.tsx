@@ -18,7 +18,7 @@ export default function ProjectBox() {
                 <Counter>득표수 112</Counter>
                 <Info>
                     <Title>아슬라 별하 이플 함초롱하다 사과 우리는 </Title>
-                    <Article>아슬라 별하 이플 함초롱하다 사과 우리는 아리아 소솜 그루잠 여우비 달볓 우리는 노트북 나래 아슬라 감또개 아련 여우비 도담도담 컴퓨터 가온누리 나비잠</Article>
+                    <Article>아슬라 별하 이플 함초롱하다 사과 우리는 아리아 소솜 그루잠 여우비 달볓 우리는 노트북 나래 아슬라 감또개 아련 여우비 도담도담 컴퓨터 가온누리 나비잠 아슬라 별하 이플 함초롱하다 사과 우리는 아리아 소솜 그루잠 여우비 달볓 우리는 노트북 나래 아슬라 감또개 아련 여우비 도담도담 컴퓨터 가온누리 나비잠</Article>
                 </Info>
                 <UserInfo>
                     <ProfileIcon src={Profile} />
@@ -93,6 +93,7 @@ height: 86px;
 font-family: ABeeZeeRegular;
 font-size: 16px;
 line-height: 180%;
+overflow: hidden;
 `
 
 const Name = styled.p`
