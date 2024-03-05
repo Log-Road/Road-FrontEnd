@@ -20,7 +20,7 @@ export default function Header() {
 
 const Container = styled.div`
 width: 100%;
-height: 88px;
+height: 5.5em;
 display: flex;
 justify-content: center;
 background-color: ${colors.Gray["gray 50"]};
@@ -35,18 +35,18 @@ align-items: center;
 
 const Flex = styled.div`
 display: flex;
-gap: 48px;
+gap: 3em;
 `
 
 const Title = styled.p`
 font-family: PretendardSemiBold;
-font-size: 24px;
+font-size: 1.5em;
 line-height: 130%;
 `
 
 const Text = styled.p`
 font-family: PretendardMedium;
-font-size: 20px;
+font-size: 1.25em;
 color: ${colors.gray2};
 `
 
