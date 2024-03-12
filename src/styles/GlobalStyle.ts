@@ -1,9 +1,4 @@
 import { createGlobalStyle } from 'styled-components';
-import PretendardMedium from "../fonts/Pretendard-Medium.ttf"
-import PretendardRegular from "../fonts/Pretendard-Regular.ttf"
-import PretendardSemiBold from "../fonts/Pretendard-SemiBold.ttf"
-import ABeeZeeRegular from "../fonts/ABeeZee-Regular.ttf"
-
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -14,25 +9,25 @@ const GlobalStyle = createGlobalStyle`
   }
 
   @font-face {
-        font-family: 'PretendardMedium';
-        src: local('PretendardMedium'), local('PretendardMedium');
-        src: url(${PretendardMedium}) format('truetype');
-  }
-  @font-face {
-        font-family: 'PretendardRegular';
-        src: local('PretendardRegular'), local('PretendardRegular');
-        src: url(${PretendardRegular}) format('truetype');
-  }
-  @font-face {
-        font-family: 'PretendardSemiBold';
-        src: local('PretendardSemiBold'), local('PretendardSemiBold');
-        src: url(${PretendardSemiBold}) format('truetype');
-  }
-  @font-face {
-        font-family: 'ABeeZeeRegular';
-        src: local('ABeeZeeRegular'), local('ABeeZeeRegular');
-        src: url(${ABeeZeeRegular}) format('truetype');
-  }
+	font-family: 'Pretendard-Regular';
+	font-weight: 400;
+	font-display: swap;
+	src: local('Pretendard Regular'), url(./woff2/Pretendard-Regular.woff2) format('woff2'), url(./woff/Pretendard-Regular.woff) format('woff');
+}
+
+@font-face {
+	font-family: 'Pretendard-Medium';
+	font-weight: 500;
+	font-display: swap;
+	src: local('Pretendard Medium'), url(./woff2/Pretendard-Medium.woff2) format('woff2'), url(./woff/Pretendard-Medium.woff) format('woff');
+}
+
+@font-face {
+	font-family: 'Pretendard-Bold';
+	font-weight: 700;
+	font-display: swap;
+	src: local('Pretendard Bold'), url(./woff2/Pretendard-Bold.woff2) format('woff2'), url(./woff/Pretendard-Bold.woff) format('woff');
+}
 `
 
-export default GlobalStyle
+export default GlobalStyle;
