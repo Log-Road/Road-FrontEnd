@@ -25,7 +25,7 @@ export default function Header() {
 
     const Data: DataItem[] = [
         { title: "구분", contents: ["전체", "개인", "팀", "동아리"] },
-        { title: "연도", contents: ["2024", "2023", "2022", "2021"] },
+        { title: "연도", contents: ["2024", "2023", "2022"] },
         { title: "정렬 기준", contents: ["인기순", "최신순"] },
     ];
 
@@ -116,7 +116,7 @@ justify-content: space-between;
 `
 
 const FlexWrap = styled.div`
-width: 65.88vw;
+width: auto;
 display: flex;
 align-items: center;
 gap: 2.50em;
