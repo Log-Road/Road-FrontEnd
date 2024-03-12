@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { colors } from "../styles/colors";
-import MainHeader from "../components/MainHeader";
+import Header from "../components/Header";
 import MainProject from "../components/MainProject";
 import { useNavigate } from "react-router-dom";
 
@@ -15,7 +15,7 @@ export default function Main() {
   return (
     <>
       <Container>
-        <MainHeader />
+        <Header />
         <Contents>
           <ProjectText>올해 작품</ProjectText>
           <ArchivingText>아카이빙</ArchivingText>
