@@ -211,7 +211,7 @@ const Button = styled.div<KeyProps>`
   border-radius: 0.75em;
   display: flex;
   align-items: center;
-  font-family: PretendardRegular;
+  font-family: 'Pretendard-Regular';
   font-size: 1em;
   line-height: 140%;
 
@@ -225,7 +225,7 @@ const Input = styled.input`
   width: 100%;
   height: 4.44vh;
   overflow: auto;
-  font-family: PretendardRegular;
+  font-family: 'Pretendard-Regular';
   font-size: 1em;
   line-height: 140%;
   padding: 0.75em 1em 0.75em 3.50em;
@@ -239,19 +239,19 @@ const Input = styled.input`
 `
 
 const Logo = styled.p`
-font-family: PretendardSemiBold;
+font-family: 'Pretendard-Bold';
 font-size: 1.5em;
 line-height: 140%;
 `
 
 const FilterText = styled.p`
-font-family: PretendardMedium;
+font-family: 'Pretendard-Medium';
   font-size: 1.125rem;
   color: ${colors.Blue["main 500"]};
 `
 
 const HandleText = styled.p`
-font-family: PretendardMedium;
+font-family: 'Pretendard-Medium';
   font-size: 1.125rem;
   color: ${colors.gray2};
   
@@ -261,7 +261,7 @@ font-family: PretendardMedium;
 `
 
 const Title = styled.p`
-  font-family: PretendardRegular;
+  font-family: 'Pretendard-Regular';
   font-size: 0.88em;
   line-height: 140%;
   color: ${colors.gray2};

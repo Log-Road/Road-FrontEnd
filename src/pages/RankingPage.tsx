@@ -68,13 +68,13 @@ margin: 0.5em 0 1.5em;
 `
 
 const Title = styled.p`
-font-family: PretendardBold;
+font-family: 'Pretendard-Bold';
 font-size: 1.5em;
 line-height: 140%;
 `
 
 const Text = styled.p`
-font-family: PretendardBold;
+font-family: 'Pretendard-Bold';
 font-size: 1.5em;
 line-height: 140%;
 color: ${colors.gray2};
@@ -103,7 +103,7 @@ background-color: #fff;
 `
 
 const SubTitle = styled.p`
-font-family: PretendardBold;
+font-family: 'Pretendard-Bold';
 font-size: 1.13em;
 line-height: 140%;
 margin-bottom: 1.75em;
