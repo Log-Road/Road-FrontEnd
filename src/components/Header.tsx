@@ -5,6 +5,7 @@ import Profile from "../assets/Profile.svg"
 import Filter from "../assets/Filter.svg"
 import Cancel from "../assets/Cancel.svg";
 import { colors } from "../styles/colors"
+import { useNavigate } from "../../node_modules/react-router-dom/dist/index";
 
 interface DataItem {
     title: string;
@@ -17,8 +18,10 @@ interface KeyProps {
 
 export default function Header() {
 
+    const navigate = useNavigate();
+
     const [searchBarOn, setSearchBarOn] = useState<Boolean>(false)
-    const [selectedArr, setSelectedArr] = useState<string[]>([])
+    const [selectedItems, setSelectedItems] = useState<{ [key: string]: string[] }>({})
 
     const Data: DataItem[] = [
         { title: "구분", contents: ["전체", "개인", "팀", "동아리"] },
@@ -26,19 +29,27 @@ export default function Header() {
         { title: "정렬 기준", contents: ["인기순", "최신순"] },
     ];
 
-    const handleKeywordClick = (content: string) => {
-        if (selectedArr.includes(content)) {
-            setSelectedArr(selectedArr.filter(item => item !== content));
-        } else {
-            setSelectedArr([...selectedArr, content]);
-        }
-    }
+    const handleKeywordClick = (title: string, content: string) => {
+        setSelectedItems(prevSelectedItems => {
+            const updatedItems = { ...prevSelectedItems };
+            
+            if (updatedItems[title]) {
+                updatedItems[title] = updatedItems[title].filter(item => item !== content);
+                if (updatedItems[title].length === 0) {
+                    delete updatedItems[title];
+                }
+            } else {
+                updatedItems[title] = [content];
+            }
+            return updatedItems;
+        });
+    };
 
     return (
         <Container>
             <Contents>
                 <FlexWrap>
-                    <Logo>ROAD</Logo>
+                    <Logo onClick={() => { navigate("/main") }}>ROAD</Logo>
 
                     <SearchWrap>
                         <InputBox onFocus={() => setSearchBarOn(true)}>
@@ -46,45 +57,45 @@ export default function Header() {
                             <Input type="text" placeholder="제목, 내용, 키워드 등을 검색해보세요."></Input>
                         </InputBox>
 
-                        <FilterBox onClick={() => setSelectedArr([]) }>
-                        <FilterIcon src={!searchBarOn && selectedArr.length === 0 ? Filter : Cancel} />
-                        <FilterText>필터</FilterText>
-                    </FilterBox>
+                        <FilterBox onClick={() => setSelectedItems({})}>
+                            <FilterIcon src={!searchBarOn && Object.keys(selectedItems).length === 0 ? Filter : Cancel} />
+                            <FilterText>필터</FilterText>
+                        </FilterBox>
 
-                    <KeyWordBox>
-                        {selectedArr.map((value, index) => (
-                            <SelectedKeyWord>{value}</SelectedKeyWord>
-                        ))}
-                    </KeyWordBox>
-
-                    {searchBarOn &&
-                        <SearchBar>
-                            {Data.map((value, index) => (
-                                <Category key={index}>
-                                    <Title>{value.title}</Title>
-                                    <Wrap>
-                                        {value.contents.map((content, id) => (
-                                            <Button key={id} isFirst={id === 0} onClick={() => handleKeywordClick(content)}>
-                                                {content}
-                                            </Button>
-                                        ))}
-                                    </Wrap>
-                                </Category>
+                        <KeyWordBox>
+                            {Object.keys(selectedItems).map((key, index) => (
+                                <SelectedKeyWord key={index}>{selectedItems[key]}</SelectedKeyWord>
                             ))}
-                        </SearchBar>
-                    }
-                </SearchWrap>
+                        </KeyWordBox>
 
-            </FlexWrap>
+                        {searchBarOn &&
+                            <SearchBar>
+                                {Data.map((value, index) => (
+                                    <Category key={index}>
+                                        <Title>{value.title}</Title>
+                                        <Wrap>
+                                            {value.contents.map((content, id) => (
+                                                <Button key={id} isFirst={id === 0} onClick={() => handleKeywordClick(value.title, content)}>
+                                                    {content}
+                                                </Button>
+                                            ))}
+                                        </Wrap>
+                                    </Category>
+                                ))}
+                            </SearchBar>
+                        }
+                    </SearchWrap>
 
-            <ItemWrap>
-                <HandleText>랭킹</HandleText>
-                <HandleText>글작성</HandleText>
-                <ProfileImg src={Profile} />
-            </ItemWrap>
-        </Contents>
+                </FlexWrap>
 
-            { searchBarOn && <Overlay onClick={() => setSearchBarOn(false)} /> }
+                <ItemWrap>
+                    <HandleText onClick={() => { navigate("/ranking") }}>랭킹</HandleText>
+                    <HandleText onClick={() => { navigate("/") }}>글작성</HandleText>
+                    <ProfileImg src={Profile} onClick={() => { navigate("/") }} />
+                </ItemWrap>
+            </Contents>
+
+            {searchBarOn && <Overlay onClick={() => setSearchBarOn(false)} />}
         </Container >
     )
 }
@@ -134,6 +145,10 @@ const FilterBox = styled.div`
   background-color: ${colors.Blue["main 50"]};
   gap: 0.13em;
   z-index: 7;
+
+  &:active {
+    background-color: ${colors.Blue["main 100"]};
+  }
 `
 
 const KeyWordBox = styled.div`
@@ -191,7 +206,7 @@ gap: 0.75em;
 
 const Button = styled.div<KeyProps>`
  padding: 0.5em 1.25em;
-  background-color: ${({ isFirst }) => (isFirst ? colors.Main : "#fff")};
+ background-color: ${({ isFirst }) => (isFirst ? colors.Main : "#fff")};
   color: ${({ isFirst }) => (isFirst ? "#fff" : colors.gray2)};
   border-radius: 0.75em;
   display: flex;
@@ -199,6 +214,10 @@ const Button = styled.div<KeyProps>`
   font-family: PretendardRegular;
   font-size: 1em;
   line-height: 140%;
+
+  &:active {
+    background-color: ${colors.Gray["gray 100"]};
+  }
   cursor: pointer;
 `
 
@@ -235,6 +254,10 @@ const HandleText = styled.p`
 font-family: PretendardMedium;
   font-size: 1.125rem;
   color: ${colors.gray2};
+  
+  &:hover {
+    color: ${colors.gray1}
+  }
 `
 
 const Title = styled.p`
