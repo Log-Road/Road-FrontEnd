@@ -19,10 +19,8 @@ export default function FindID() {
     const [newPassWord, setNewPassWord] = useState<String>("")
     const [checkedPassWord, setCheckedPassWord] = useState<String>("")
     const [isOpen, setIsOpen] = useState<Boolean>(true)
-
-    const toggleOpen = () => {
-        setIsOpen(!isOpen)
-    }
+    const [showPassWord, setShowPassWord] = useState<Boolean>(true)
+    const [showCheckedPassword, setShowCheckedPassword] = useState<Boolean>(true)
 
     return (
         <Container>
@@ -45,12 +43,22 @@ export default function FindID() {
                     (
                         <Wrap>
                             <InputWrap>
-                                <Input placeholder="새 비밀번호" onChange={(e) => { setNewPassWord(e.target.value) }} />
-                                <Icon src={CloseEye} />
+                                <Input
+                                    type={showPassWord ? "text" : "password"}
+                                    placeholder="새 비밀번호"
+                                    onChange={(e) => { setNewPassWord(e.target.value) }} />
+                                <Icon
+                                    src={showPassWord ? OpenEye : CloseEye}
+                                    onClick={() => { setShowPassWord(!showPassWord) }} />
                             </InputWrap >
                             <InputWrap>
-                                <Input placeholder="새 비밀번호 확인" onChange={(e) => { setCheckedPassWord(e.target.value) }} />
-                                <Icon src={OpenEye} />
+                                <Input
+                                    type={showCheckedPassword ? "text" : "password"}
+                                    placeholder="새 비밀번호 확인"
+                                    onChange={(e) => { setCheckedPassWord(e.target.value) }} />
+                                <Icon
+                                    src={showCheckedPassword ? OpenEye : CloseEye}
+                                    onClick={() => { setShowCheckedPassword(!showCheckedPassword) }} />
                             </InputWrap >
                             <ErrorMessage>인증번호를 입력해주세요</ErrorMessage>
                         </Wrap>
@@ -59,7 +67,7 @@ export default function FindID() {
 
                 <BtnWrap>
                     {isOpen ? (
-                        <Button onClick={() => { toggleOpen()}}>다음</Button>
+                        <Button onClick={() => { setIsOpen(!isOpen) }}>다음</Button>
                     ) : (
                         <Button onClick={() => { navigate("/login") }}>비밀번호 변경</Button>
                     )}
