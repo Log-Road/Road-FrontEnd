@@ -34,7 +34,7 @@ export default function FindID() {
 
                 <BtnWrap>
                     <LoginButton onClick={() => { navigate("/login") }}>로그인</LoginButton>
-                    <HandlePassword onClick={() => {navigate("")}}>비밀번호 찾기</HandlePassword>
+                    <HandlePassword onClick={() => {navigate("/findPassWord")}}>비밀번호 찾기</HandlePassword>
                 </BtnWrap>
 
             </Contents>
