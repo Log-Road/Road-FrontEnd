@@ -85,7 +85,6 @@ border-radius: 0.75em;
 padding: 0 1.5em;
 font-family: 'Pretendard-Regular';
 font-size: 1em;
-color: ${colors.gray1};
 
 &:focus {
     border-color: ${colors.Main};
