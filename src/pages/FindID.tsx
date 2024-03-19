@@ -10,9 +10,6 @@ import { useNavigate } from "react-router-dom";
 
 export default function FindID() {
 
-    // 회원님의 아이디는 abcd1234 입니다. 
-    //이거 인증번호를 입력해주세요 이 텍스트에 나타나도록 하던가 alert로 띄우기
-
     const navigate = useNavigate()
 
     const [email, setEmail] = useState<String>("")
@@ -26,13 +23,13 @@ export default function FindID() {
                 <Wrap>
                     <InputWrap>
                         <Input placeholder="이메일" onChange={(e)=>{setEmail(e.target.value)}}/>
-                        <InnerText>@gmail.com</InnerText>
+                        <InnerText>인증번호 발송</InnerText>
                     </InputWrap >
                     <InputWrap>
                         <Input placeholder="인증번호" onChange={(e)=>{setAuthenticationNumber(e.target.value)}}/>
-                        <InnerText>발송하기</InnerText>
+                        <InnerText>인증하기</InnerText>
                     </InputWrap >
-                    <Text>인증번호를 입력해주세요</Text>
+                    <ErrorMessage>인증번호를 입력해주세요</ErrorMessage>
                 </Wrap>
 
                 <BtnWrap>
@@ -80,14 +77,13 @@ position: relative;
 const Input = styled.input`
 width: 22.5em;
 height: 3.38em;
-border: 0.06em solid ${colors.Gray["gray 200"]};
+border: 0.08em solid ${colors.Gray["gray 200"]};
 border-radius: 0.75em;
 padding: 0 1.5em;
 font-family: 'Pretendard-Regular';
 font-size: 1em;
-color: ${colors.gray1};
 
-& :focus {
+&:focus {
     border-color: ${colors.Main};
     outline: none;
   }
@@ -106,7 +102,7 @@ align-items: center;
 font-family: 'Pretendard-Medium';
 font-size: 1em;
 
-&:active {
+&:hover {
     background-color: ${colors.Blue["main 600"]};
 }
 `
@@ -120,7 +116,7 @@ font-size: 1em;
 color: ${colors.gray2};
 
 &:hover {
-    color: ${colors.Gray["gray 800"]};
+    color: ${colors.Main};
 }
 `
 
@@ -140,8 +136,8 @@ color: ${colors.gray1};
 }
 `
 
-const Text = styled.text`
+const ErrorMessage = styled.text`
 font-family: 'Pretendard-Regular';
 font-size: 1em;
-color: ${colors.Main};
+color: ${colors.Error};
 `
