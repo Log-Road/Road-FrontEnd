@@ -10,9 +10,6 @@ import { useNavigate } from "react-router-dom";
 
 export default function FindID() {
 
-    // 회원님의 아이디는 abcd1234 입니다. 
-    //이거 인증번호를 입력해주세요 이 텍스트에 나타나도록 하던가 alert로 띄우기
-
     const navigate = useNavigate()
 
     const [email, setEmail] = useState<String>("")
