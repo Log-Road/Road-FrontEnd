@@ -1,10 +1,13 @@
 import React, {useState} from "react";
 import styled from "styled-components";
 import { colors } from "../styles/colors"
+import { useNavigate } from "react-router-dom";
 
 export default function FindID() {
+    const navigate = useNavigate()
 
     const [email, setEmail] = useState<String>("")
+    const [AuthenticationNumber, setAuthenticationNumber] = useState<String>("")
 
     return (
         <Container>
@@ -17,15 +20,15 @@ export default function FindID() {
                         <InnerText>@gmail.com</InnerText>
                     </InputWrap >
                     <InputWrap>
-                        <Input placeholder="인증번호" />
+                        <Input placeholder="인증번호" onChange={(e)=>{setAuthenticationNumber(e.target.value)}}/>
                         <InnerText>발송하기</InnerText>
                     </InputWrap >
                     <Text>인증번호를 입력해주세요</Text>
                 </Wrap>
 
                 <BtnWrap>
-                    <LoginButton>로그인</LoginButton>
-                    <HandlePassword>비밀번호 찾기</HandlePassword>
+                    <LoginButton onClick={() => { navigate("/login") }}>로그인</LoginButton>
+                    <HandlePassword onClick={() => {navigate("")}}>비밀번호 찾기</HandlePassword>
                 </BtnWrap>
 
             </Contents>
