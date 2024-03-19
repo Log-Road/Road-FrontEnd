@@ -96,6 +96,10 @@ justify-content: center;
 align-items: center;
 font-family: 'Pretendard-Medium';
 font-size: 1em;
+
+&:active {
+    background-color: ${colors.Blue["main 600"]};
+}
 `
 
 const InnerText = styled.text`
@@ -105,6 +109,10 @@ right: 1.50em;
 font-family: 'Pretendard-Regular';
 font-size: 1em;
 color: ${colors.gray2};
+
+&:hover {
+    color: ${colors.Gray["gray 800"]};
+}
 `
 
 const Title = styled.text`
@@ -117,6 +125,10 @@ const HandlePassword = styled.text`
 font-family: 'Pretendard-Regular';
 font-size: 1em;
 color: ${colors.gray1};
+
+&:hover {
+    color: ${colors.gray2};
+}
 `
 
 const Text = styled.text`
