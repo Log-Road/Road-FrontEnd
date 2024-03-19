@@ -5,6 +5,8 @@ import Main from "../pages/Main";
 import Login from "../pages/Login";
 import SelectUser from "../pages/SelectUser";
 import FindId from "../pages/FindID";
+import FindPassWord from "../pages/FindPassWord"
+import ChangePassWord from "../pages/ChangePassWord"
 
 export default function Router() {
   return (
@@ -15,6 +17,8 @@ export default function Router() {
         <Route path="/login" element={<Login />} />
         <Route path="/selectuser" element={<SelectUser />} />
         <Route path="/findID" element={<FindId />} />
+        <Route path="/findPassWord" element={<FindPassWord />} />
+        <Route path="/changePassWord" element={<ChangePassWord />} />
       </Routes>
     </BrowserRouter>
   )
