@@ -30,11 +30,17 @@ export default function FindID() {
                 {isOpen ? (
                     <Wrap >
                         <InputWrap>
-                            <Input placeholder="이메일" onChange={(e) => { setEmail(e.target.value) }} />
+                            <Input
+                                value={email}
+                                placeholder="이메일"
+                                onChange={(e) => { setEmail(e.target.value) }} />
                             <InnerText>인증번호 발송</InnerText>
                         </InputWrap >
                         <InputWrap>
-                            <Input placeholder="인증번호" onChange={(e) => { setAuthenticationNumber(e.target.value) }} />
+                            <Input
+                                value={AuthenticationNumber}
+                                placeholder="인증번호"
+                                onChange={(e) => { setAuthenticationNumber(e.target.value) }} />
                             <InnerText>인증하기</InnerText>
                         </InputWrap >
                         <ErrorMessage>인증번호를 입력해주세요</ErrorMessage>
@@ -44,6 +50,7 @@ export default function FindID() {
                         <Wrap>
                             <InputWrap>
                                 <Input
+                                    value={newPassWord}
                                     type={showPassWord ? "text" : "password"}
                                     placeholder="새 비밀번호"
                                     onChange={(e) => { setNewPassWord(e.target.value) }} />
@@ -53,6 +60,7 @@ export default function FindID() {
                             </InputWrap >
                             <InputWrap>
                                 <Input
+                                    value={checkedPassWord}
                                     type={showCheckedPassword ? "text" : "password"}
                                     placeholder="새 비밀번호 확인"
                                     onChange={(e) => { setCheckedPassWord(e.target.value) }} />
