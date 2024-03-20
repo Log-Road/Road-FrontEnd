@@ -14,13 +14,23 @@ export default function FindID() {
 
     const navigate = useNavigate()
 
-    const [email, setEmail] = useState<String>("")
-    const [AuthenticationNumber, setAuthenticationNumber] = useState<String>("")
-    const [newPassWord, setNewPassWord] = useState<String>("")
-    const [checkedPassWord, setCheckedPassWord] = useState<String>("")
-    const [isOpen, setIsOpen] = useState<Boolean>(true)
-    const [showPassWord, setShowPassWord] = useState<Boolean>(true)
-    const [showCheckedPassword, setShowCheckedPassword] = useState<Boolean>(true)
+    const [email, setEmail] = useState<string>("")
+    const [AuthenticationNumber, setAuthenticationNumber] = useState<string>("")
+    const [newPassWord, setNewPassWord] = useState<string>("")
+    const [checkedPassWord, setCheckedPassWord] = useState<string>("")
+    const [isOpen, setIsOpen] = useState<boolean>(true)
+    const [showPassWord, setShowPassWord] = useState<boolean>(false)
+    const [showCheckedPassword, setShowCheckedPassword] = useState<boolean>(false)
+    const [error, setError] = useState<string>("")
+
+    const passWordRegEx = /^(?=.*[0-9])(?=.*[!@#$%^*,.?]).*$/;
+
+    const handleSubmit = () => {
+        if ((newPassWord.length < 7) || (newPassWord.length > 15)) setError("비밀번호는 8글자 이상 15글자 이내여야 합니다")
+        else if (!passWordRegEx.test(newPassWord)) setError("영문자, 숫자, 특수문자를 포함하여 비밀번호를 만들어야 합니다")
+        else if (newPassWord !== checkedPassWord) setError("비밀번호가 일치하지 않습니다")
+        else navigate("/main")
+    }
 
     return (
         <Container>
@@ -68,7 +78,7 @@ export default function FindID() {
                                     src={showCheckedPassword ? OpenEye : CloseEye}
                                     onClick={() => { setShowCheckedPassword(!showCheckedPassword) }} />
                             </InputWrap >
-                            <ErrorMessage>인증번호를 입력해주세요</ErrorMessage>
+                            <ErrorMessage>{error}</ErrorMessage>
                         </Wrap>
                     )
                 }
@@ -77,7 +87,7 @@ export default function FindID() {
                     {isOpen ? (
                         <Button onClick={() => { setIsOpen(!isOpen) }}>다음</Button>
                     ) : (
-                        <Button onClick={() => { navigate("/login") }}>비밀번호 변경</Button>
+                        <Button onClick={() => { handleSubmit() }}>비밀번호 변경</Button>
                     )}
 
 
@@ -174,7 +184,7 @@ line-height: 120%;
 
 const ErrorMessage = styled.text`
 font-family: 'Pretendard-Regular';
-font-size: 1em;
+font-size: 0.8em;
 color: ${colors.Error};
 `
 
