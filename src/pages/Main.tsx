@@ -14,82 +14,80 @@ export default function Main() {
 
   return (
     <>
-      <Container>
-        <Header />
-        <Contents>
-          <ProjectText>올해 작품</ProjectText>
-          <ArchivingText>아카이빙</ArchivingText>
-        </Contents>
-        <ProjectBox>
+    <Container>
+      <Header />
+      <div>
+        <TextBox>
+          <Text>올해 작품</Text>
+          <Text>아카이빙</Text>
+        </TextBox>
+      <ProjectBox>
           <MainProject />
           <MainProject />
           <MainProject />
           <MainProject />
-        </ProjectBox>
-        <ProjectBox>
+      
+          <MainProject />
+          <MainProject />
+          <MainProject />
+          <MainProject />
+      
+          <MainProject />
+          <MainProject />
+          <MainProject />
+          <MainProject />
+      
           <MainProject />
           <MainProject />
           <MainProject />
           <MainProject />
         </ProjectBox>
         <VoteBtn>투표하러 가기</VoteBtn>
-      </Container>
-    </>
-  );
+      </div>
+    </Container>
+  </>
+);
 }
 
 const Container = styled.div`
-  width: 100%;
-  height: 100vh;
-  overflow-y: auto;
-  background-color: ${colors.Gray["gray 50"]};
-  position: relative;
+width: 100%;
+height: auto;
+background-color: ${colors.Gray["gray 50"]};
+position: relative;
+overflow-y: auto;
 `;
 
-const Contents = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1.75rem;
-  margin: 0 0 0 11.4vw;
-`;
+const TextBox = styled.div`
+display: flex;
+justify-content: start;
+margin: 0 0 0 150px;
+gap: 28px;
+`
 
-const ProjectText = styled.p`
-  font-size: 1.3rem;
-  border-bottom: 2px solid black;
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
-const ArchivingText = styled.p`
-  font-size: 1.3rem;
-  color: ${colors.gray2};
-  &:hover {
-    cursor: no-drop;
-  }
-`;
+const Text = styled.p`
+font-family: "Pretendard-Medium";
+font-size: 18px;
+`
 
 const ProjectBox = styled.div`
-  display: flex;
-  margin: 2rem 0 0 11vw;
-  gap: 1.5rem;
-`;
-
+display: flex;
+justify-content: space-around;
+flex-wrap: wrap;
+margin: 32px 0 44px 0;
+padding: 0 140px;
+gap: 32px 0;
+`
 
 const VoteBtn = styled.button`
-  width: 11vw;
-  height: 2.7vw;
-  font-size: 18px;
-  font-weight: 700;
-  border: none;
-  border-radius: 10px;
-  color: ${colors.White};
-  background-color: ${colors.Main};
-  position: fixed;
-  bottom: 20px; /* 조정할 수 있는 값입니다. */
-  left: 44%; /* 조정할 수 있는 값입니다. */
-
-  &:hover {
-    cursor: pointer;
-  }
-`;
+width: 216px;
+height: 52px;
+font-family: "Pretendard-Medium";
+font-size: 16px;
+border: none;
+border-radius: 12px;
+color: white;
+background-color: ${colors.Main};
+position: fixed;
+bottom: 20px;
+left: 44%;
+`
