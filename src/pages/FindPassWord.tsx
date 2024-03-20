@@ -8,11 +8,14 @@ import { useNavigate } from "react-router-dom";
  * @returns 비밀번호 찾기 페이지
  */
 
+interface LoginButtonProps {
+    possibleLogin : boolean
+}
 
 export default function FindPassWord() {
     const navigate = useNavigate()
 
-    const [userId, setUserId] = useState<String>("")
+    const [userId, setUserId] = useState<string>("")
     const [possibleLogin, setPossibleLogin] = useState<boolean>(false)
 
     return (
@@ -85,7 +88,7 @@ font-size: 1em;
   }
 `
 
-const LoginButton = styled.button`
+const LoginButton = styled.button<LoginButtonProps>`
 width: 22.5em;
 height: 3.25em;
 border: none;
@@ -139,6 +142,6 @@ color: ${colors.gray1};
 
 const ErrorMessage = styled.text`
 font-family: 'Pretendard-Regular';
-font-size: 1em;
+font-size: 0.8em;
 color: ${colors.Error};
 `
