@@ -1,6 +1,6 @@
 ---
-name: Bug report
-about: Create a report to help us improve
+name: "\U0001F41B Bug report"
+about: EX) 인풋창 버그 수정
 title: ''
 labels: ''
 assignees: ''
@@ -10,7 +10,8 @@ assignees: ''
 **이슈 설명**
 이슈에 대한 간단한 설명을 적어주세요술방망이
 
-**
+**버그 설명**
+어떤 버그가 있었나요? 어떤 상황에 버그가 있었나요?
 
 **작업 내용**
 이번 작업에 대한 자세한 내용을 적어주세요
