@@ -8,25 +8,40 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [usernameError, setUsernameError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isFilled, setIsFilled] = useState(false);
 
   const handleUsernameChange = (event: ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
     setUsernameError(false);
+    checkFilled(event.target.value, password);
   };
 
   const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
     setPasswordError(false);
+    checkFilled(username, event.target.value);
   };
 
   const handleSubmit = () => {
     if (username === "") {
       setUsernameError(true);
+      setErrorMessage("아이디를 확인해주세요.");
     }
     if (password === "") {
       setPasswordError(true);
+      setErrorMessage("비밀번호를 확인해주세요.");
     }
   };
+
+  const checkFilled = (username: string, password: string) => {
+    if (username !== "" && password !== "") {
+      setIsFilled(true);
+    } else {
+      setIsFilled(false);
+    }
+  };
+
 
   return (
     <>
@@ -50,7 +65,12 @@ export default function Login() {
             onChange={handlePasswordChange}
             isError={passwordError}
           />
-          <NextBtn onClick={handleSubmit}>다음</NextBtn>
+          <ErrorMessage isError={usernameError || passwordError}>
+            {errorMessage}
+          </ErrorMessage>
+          <NextBtn onClick={handleSubmit} isFilled={isFilled}>
+            로그인
+          </NextBtn>
           <FindBox>
             <Find>아이디 찾기</Find>
             <CenterLine></CenterLine>
@@ -111,17 +131,24 @@ const Input = styled.input<{ isError: boolean }>`
     border-color: ${({ isError }) => (isError ? "red" : colors.gray2)};
     outline: none;
   }
+  transition: border 0.3s ease-in-out;
 `;
 
+const ErrorMessage = styled.p<{ isError: boolean }>`
+  color: ${({ isError }) => (isError ? "red" : "transparent")};
+  font-size: 14px;
+  margin-top: 4px;
+  display: ${({ isError }) => (isError ? "block" : "none")};
+`;
 
-
-const NextBtn = styled.button`
+const NextBtn = styled.button<{ isFilled: boolean }>`
   width: 22.5em;
   height: 3.3em;
   color: ${colors.gray2};
   border: none;
   border-radius: 12px;
-  background-color: ${colors.Gray["gray 200"]};
+  color: ${({isFilled}) => (isFilled ? colors.White : colors.gray2)};
+  background-color: ${({ isFilled }) => (isFilled ? colors.Main : colors.gray1)}; 
   margin: 4em 0 0 0;
 `;
 
