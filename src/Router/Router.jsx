@@ -8,6 +8,10 @@ import FindId from "../pages/FindID";
 import FindPassWord from "../pages/FindPassWord"
 import ChangePassWord from "../pages/ChangePassWord"
 
+import TeacherPage from "../pages/TeacherPage"
+import Personnel from "../pages/WritePage/Personnel";
+import PersonalProject from "../pages/WritePage/PersonalProject";
+
 export default function Router() {
   return (
     <BrowserRouter>
@@ -16,9 +20,9 @@ export default function Router() {
         <Route path="/ranking" element={<RankingPage/>}/>
         <Route path="/login" element={<Login />} />
         <Route path="/selectuser" element={<SelectUser />} />
-        <Route path="/findID" element={<FindId />} />
-        <Route path="/findPassWord" element={<FindPassWord />} />
-        <Route path="/changePassWord" element={<ChangePassWord />} />
+        <Route path="/teacher" element={<TeacherPage />} />
+        <Route path="/write/personnel" element={<Personnel/>} />
+        <Route path="/personnel" element={<PersonalProject/>} />
       </Routes>
     </BrowserRouter>
   )

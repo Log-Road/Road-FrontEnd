@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {colors} from "../styles/colors"
+import { colors } from "../../styles/colors"
 
 interface BorderBtnProps {
   text: string;
@@ -19,6 +19,12 @@ const Btn = styled.button`
   font-weight: 700;
   color: ${colors.Main};
   border-radius: 12px;
-  border: 0.5px solid ${colors.Main};
+  border: 1px solid ${colors.Main}; // 고침 1px
   background-color: transparent;
+
+  &:hover { // 만듦
+    background-color: ${colors.Main};
+    color: ${colors.White};
+  }
+  
 `

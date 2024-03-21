@@ -30,10 +30,10 @@ export default function MainProject() {
 };
 
 const Container = styled.div`
-  width: 23.19em;
+  width: 387px;
   height: auto; /* 높이를 자동으로 설정하여 내용에 맞게 조정합니다. */
   border-radius: 1em;
-  background-color: #fff;
+  background-color: blue;
   overflow-x: hidden; /* 내용이 부족해도 스크롤이 생기지 않도록 설정합니다. */
 `;
 
