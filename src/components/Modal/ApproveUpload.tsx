@@ -13,7 +13,7 @@ export default function ApproveUpload() {
             <Contents>
                 <Text>게시물 업로드 승인하시겠습니까?</Text>
                 <ButtonWrap>
-                    <CancleBtn>취소</CancleBtn>
+                    <CancelBtn>취소</CancelBtn>
                     <ApproveBtn>승인</ApproveBtn>
                 </ButtonWrap>
             </Contents>
@@ -46,7 +46,7 @@ justify-content: flex-end;
 gap: 0.75em;
 `
 
-const CancleBtn = styled.div`
+const CancelBtn = styled.div`
 color: ${colors.Gray["gray 600"]};
 background-color: ${colors.Gray["gray 100"]};
 border-radius: 0.63em;
