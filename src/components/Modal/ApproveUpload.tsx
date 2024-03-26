@@ -2,6 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { colors } from "../../styles/colors"
 
+/**
+ * 
+ * @returns 게시물 업로드 승인 모달 창
+ */
+
 export default function ApproveUpload() {
     return (
         <Container>
@@ -17,8 +22,8 @@ export default function ApproveUpload() {
 }
 
 const Container = styled.div`
-width: 20%;
-height: 15%;
+width: 360px;
+height: 160px;
 border-radius: 1em;
 padding: 1.25em;
 `
@@ -29,7 +34,7 @@ flex-direction: column;
 gap: 3.13em;
 `
 
-const Text = styled.div`
+const Text = styled.p`
 font-family: 'Pretendard-Regular';
 font-size: 1.13em;
 line-height: 1.69em
@@ -46,6 +51,10 @@ color: ${colors.Gray["gray 600"]};
 background-color: ${colors.Gray["gray 100"]};
 border-radius: 0.63em;
 padding: 0.5em 1.25em;
+
+&:hover {
+    background-color: ${colors.Gray["gray 200"]};
+}
 `
 
 const ApproveBtn = styled.div`
@@ -53,4 +62,8 @@ color: ${colors.White};
 background-color: ${colors.Main};
 border-radius: 0.63em;
 padding: 0.5em 1.25em;
+
+&:hover {
+    background-color: ${colors.Blue["main 600"]};
+}
 `
