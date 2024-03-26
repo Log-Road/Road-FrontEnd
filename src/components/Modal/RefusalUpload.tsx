@@ -14,7 +14,7 @@ export default function RefusalUpload() {
                 <Text>게시글 업로드 승인을 거부하시겠습니까?</Text>
                 <Write placeholder="거부 사유" />
                 <ButtonWrap>
-                    <CancleBtn>취소</CancleBtn>
+                    <CancelBtn>취소</CancelBtn>
                     <RefusalBtn>거부</RefusalBtn>
                 </ButtonWrap>
             </Contents>
@@ -60,7 +60,7 @@ justify-content: flex-end;
 gap: 0.75em;
 `
 
-const CancleBtn = styled.div`
+const CancelBtn = styled.div`
 color: ${colors.Gray["gray 600"]};
 background-color: ${colors.Gray["gray 100"]};
 border-radius: 0.63em;

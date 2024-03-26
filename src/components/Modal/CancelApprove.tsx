@@ -17,7 +17,7 @@ export default function CancelApprove() {
                 </TextWrap>
                 <Write placeholder="승인 취소 사유" />
                 <ButtonWrap>
-                    <CancleBtn>취소</CancleBtn>
+                    <CancelBtn>취소</CancelBtn>
                     <RefusalBtn>승인 취소</RefusalBtn>
                 </ButtonWrap>
             </Contents>
@@ -76,7 +76,7 @@ justify-content: flex-end;
 gap: 0.75em;
 `
 
-const CancleBtn = styled.div`
+const CancelBtn = styled.div`
 color: ${colors.Gray["gray 600"]};
 background-color: ${colors.Gray["gray 100"]};
 border-radius: 0.63em;
