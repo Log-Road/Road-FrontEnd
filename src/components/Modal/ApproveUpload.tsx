@@ -17,40 +17,40 @@ export default function ApproveUpload() {
 }
 
 const Container = styled.div`
-width: 360px;
-height: 160px;
-border-radius: 16px;
-padding: 20px;
+width: 20%;
+height: 15%;
+border-radius: 1em;
+padding: 1.25em;
 `
 
 const Contents = styled.div`
 display: flex;
 flex-direction: column;
-gap: 50px;
+gap: 3.13em;
 `
 
 const Text = styled.div`
 font-family: 'Pretendard-Regular';
-font-size: 18px;
-line-height: 27px;
+font-size: 1.13em;
+line-height: 1.69em
 `
 
 const ButtonWrap = styled.div`
 display: flex;
 justify-content: flex-end;
-gap: 12px;
+gap: 0.75em;
 `
 
 const CancleBtn = styled.div`
 color: ${colors.Gray["gray 600"]};
 background-color: ${colors.Gray["gray 100"]};
-border-radius: 10px;
-padding: 8px 20px;
+border-radius: 0.63em;
+padding: 0.5em 1.25em;
 `
 
 const ApproveBtn = styled.div`
 color: ${colors.White};
 background-color: ${colors.Main};
-border-radius: 10px;
-padding: 8px 20px;
+border-radius: 0.63em;
+padding: 0.5em 1.25em;
 `
