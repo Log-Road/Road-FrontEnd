@@ -5,6 +5,12 @@ import Header from "../../components/Header";
 import UpArrow from "../../assets/UpArrow.svg"
 import DownArrow from "../../assets/DownArrow.svg"
 
+const StudentData = {
+    grade: ["학년", 1],
+    class: ["반", 1],
+    StudentId: ["학번", 10]
+}
+
 export default function StudentInfoEdit() {
     return (
         <Container>
@@ -17,18 +23,14 @@ export default function StudentInfoEdit() {
                 </TitleWrap>
 
                 <Wrap>
-                    <InputWrap>
-                        <Input />
-                        <Text>학년</Text>
-                    </InputWrap>
-                    <InputWrap>
-                        <Input />
-                        <Text>반</Text>
-                    </InputWrap>
-                    <InputWrap>
-                        <Input />
-                        <Text>번호</Text>
-                    </InputWrap>
+                    {
+                        Object.keys(StudentData).map((key, index) => (
+                            <InputWrap key={index}>
+                                <Input/>
+                                <Text>{StudentData[key][0]}</Text>
+                            </InputWrap>
+                        ))
+                    }
 
                     <DropBoxWrap>
                         <Select name="state">
