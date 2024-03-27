@@ -8,6 +8,7 @@ import FindId from "../pages/FindID";
 import FindPassWord from "../pages/FindPassWord";
 import ChangePassWord from "../pages/ChangePassWord";
 import InformationPersonnel from "../pages/Admin/InformationPersonnel";
+import StudentInfoEdit from "../pages/Admin/StudentInfoEdit";
 
 export default function Router() {
   return (
@@ -21,6 +22,7 @@ export default function Router() {
         <Route path="/findPassWord" element={<FindPassWord />} />
         <Route path="/changePassWord" element={<ChangePassWord />} />
         <Route path="/informationPersonnel" element={<InformationPersonnel />}/>
+        <Route path="/studentInfoEdit" element={<StudentInfoEdit/>} />
       </Routes>
     </BrowserRouter>
   );
