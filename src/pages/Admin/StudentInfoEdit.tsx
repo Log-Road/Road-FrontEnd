@@ -113,6 +113,11 @@ color: ${colors.gray2};
 font-family: 'Pretendard-Bold';
 font-size: 1.13em;
 line-height: 140%;
+
+&:hover {
+    background-color: ${colors.Gray["gray 50"]};
+    color: ${colors.Gray["gray 800"]};
+}
 `
 
 const SuccessButton = styled.div`
@@ -128,6 +133,11 @@ color: ${colors.White};
 font-family: 'Pretendard-Bold';
 font-size: 1.13em;
 line-height: 140%;
+
+&:hover {
+    background-color: ${colors.Blue["main 600"]};
+    color: ${colors.Gray["gray 50"]};
+}
 `
 
 const Input = styled.input`
@@ -135,8 +145,16 @@ width: 100%;
 height: 100%;
 border: 0.06em solid ${colors.Gray["gray 200"]};
 border-radius: 0.75em;
+font-family: 'Pretendard-Regular';
+font-size: 1em;
+line-height: 140%;
 outline: none;
 padding: 1em 1.50em;
+
+&:focus {
+    background-color: #fdfdfd;
+    border: 0.12em solid ${colors.Gray["gray 100"]};
+}
 `
 
 const Select = styled.select`
@@ -150,6 +168,11 @@ font-size: 1em;
 line-height: 140%;
 outline: none;
 appearance: none;
+
+&:focus {
+    background-color: #fdfdfd;
+    border: 0.12em solid ${colors.Gray["gray 100"]};
+}
 `
 
 const Option = styled.option``
