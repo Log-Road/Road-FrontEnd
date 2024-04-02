@@ -22,11 +22,15 @@ export default function ChangeStudentID() {
         studentId: ""
     })
 
-    const changeInputValue = (e: React.ChangeEvent<HTMLInputElement>, info: string) => {
+    const changeInputValue = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
         const newValue = e.target.value;
-        setStudentData({ ...studentData, [info]: newValue });
+        setStudentData({ ...studentData, [StudentInfo[index].info]: newValue });
+        
+        if(newValue.length === StudentInfo[index].maxlength && index < StudentInfo.length -1) {
+            const nextInput = document.getElementById(`input-${index+1}`) as HTMLInputElement;
+            nextInput.focus();
+        }
     }
-    
 
     return (
         <Container>
@@ -36,10 +40,12 @@ export default function ChangeStudentID() {
                     <Title>학번 변경</Title>
                     <Wrap>
                         {StudentInfo.map((value, index) => (
-                            <InputWrap key={index}>
-                                <Input 
-                                onChange={(e) => changeInputValue(e, value.info)} 
+                            <InputWrap>
+                                <Input
+                                id={`input-${index}`}
+                                onChange={(e) => changeInputValue(e, index)} 
                                 maxLength={value.maxlength}
+                                autoFocus={index === 0}
                                 />
                                 <InnerText>{value.info}</InnerText>
                             </InputWrap>
