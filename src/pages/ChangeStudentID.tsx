@@ -1,39 +1,47 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { colors } from "../styles/colors"
 import Header from "../components/Header";
 
 interface InfoItem {
-    info : string;
+    info: string;
+    label: string;
     maxlength: number
 }
 
 interface ChangeButtonProps {
-    changeButtonActive : boolean
+    changeButtonActive: boolean
 }
 
 export default function ChangeStudentID() {
 
     const StudentInfo: InfoItem[] = [
-        { info: "학년", maxlength : 1},
-        { info: "반", maxlength: 1}, 
-        { info: "번호", maxlength: 2}
+        { info: "grade", label: "학년", maxlength: 1 },
+        { info: "class", label: "반", maxlength: 1 },
+        { info: "studentId", label: "학번", maxlength: 2 }
     ];
 
+    const [error, setError] = useState<string>("")
+    const [changeButtonActive, setChangeButtonActive] = useState<boolean>(false)
     const [studentData, setStudentData] = useState({
         grade: "",
         class: "",
         studentId: ""
     })
-    const [error, setError] = useState<string>("")
-    const [changeButtonActive, setChangeButtonActive] = useState<boolean>(false)
+
+    useEffect(() => {
+        const isAllInfoInput = Object.values(studentData).every(value => value !== "")
+        setChangeButtonActive(isAllInfoInput)
+        setError(isAllInfoInput? "" : "학생 정보를 모두 기입해주세요")
+    }, [studentData])
 
     const changeInputValue = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
         const newValue = e.target.value;
-        setStudentData({ ...studentData, [StudentInfo[index].info]: newValue });
-        
-        if(newValue.length === StudentInfo[index].maxlength && index < StudentInfo.length -1) {
-            const nextInput = document.getElementById(`input-${index+1}`) as HTMLInputElement;
+        const updatedData = { ...studentData, [StudentInfo[index].info]: newValue };
+        setStudentData(updatedData);
+
+        if (newValue.length === StudentInfo[index].maxlength && index < StudentInfo.length - 1) {
+            const nextInput = document.getElementById(`input-${index + 1}`) as HTMLInputElement;
             nextInput.focus();
         }
     }
@@ -46,14 +54,14 @@ export default function ChangeStudentID() {
                     <Title>학번 변경</Title>
                     <Wrap>
                         {StudentInfo.map((value, index) => (
-                            <InputWrap>
+                            <InputWrap key={index}>
                                 <Input
-                                id={`input-${index}`}
-                                onChange={(e) => changeInputValue(e, index)} 
-                                maxLength={value.maxlength}
-                                autoFocus={index === 0}
+                                    id={`input-${index}`}
+                                    onChange={(e) => changeInputValue(e, index)}
+                                    maxLength={value.maxlength}
+                                    autoFocus={index === 0}
                                 />
-                                <InnerText>{value.info}</InnerText>
+                                <InnerText>{value.label}</InnerText>
                             </InputWrap>
                         ))}
                         <ErrorMessage>{error}</ErrorMessage>
@@ -163,8 +171,8 @@ width: 175px;
 height: 52px;
 border: none;
 border-radius: 0.75em;
-background-color: ${({changeButtonActive}) => changeButtonActive? colors.Main : colors.Gray["gray 200"]};
-color: ${({changeButtonActive}) => changeButtonActive? colors.White : colors.gray2};
+background-color: ${({ changeButtonActive }) => changeButtonActive ? colors.Main : colors.Gray["gray 200"]};
+color: ${({ changeButtonActive }) => changeButtonActive ? colors.White : colors.gray2};
 display: flex;
 justify-content: center;
 align-items: center;
@@ -172,6 +180,6 @@ font-family: 'Pretendard-Medium';
 font-size: 1em;
 
 &:hover {
-    background-color:${({changeButtonActive}) => changeButtonActive? colors.Main : colors.Gray["gray 300"]};
+    background-color:${({ changeButtonActive }) => changeButtonActive ? colors.Main : colors.Gray["gray 300"]};
 }
 `
