@@ -21,6 +21,7 @@ export default function ChangeStudentID() {
         class: "",
         studentId: ""
     })
+    const [error, setError] = useState<String>("")
 
     const changeInputValue = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
         const newValue = e.target.value;
@@ -50,7 +51,7 @@ export default function ChangeStudentID() {
                                 <InnerText>{value.info}</InnerText>
                             </InputWrap>
                         ))}
-                        <ErrorMessage>오류메세지 입니다</ErrorMessage>
+                        <ErrorMessage>{error}</ErrorMessage>
                     </Wrap>
                     <ButtonWrap>
                         <CancelButton>취소</CancelButton>
