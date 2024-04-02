@@ -57,6 +57,7 @@ export default function ChangeStudentID() {
                             <InputWrap key={index}>
                                 <Input
                                     id={`input-${index}`}
+                                    type="number"
                                     onChange={(e) => changeInputValue(e, index)}
                                     maxLength={value.maxlength}
                                     autoFocus={index === 0}
