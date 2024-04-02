@@ -8,6 +8,10 @@ interface InfoItem {
     maxlength: number
 }
 
+interface ChangeButtonProps {
+    changeButtonActive : boolean
+}
+
 export default function ChangeStudentID() {
 
     const StudentInfo: InfoItem[] = [
@@ -21,7 +25,8 @@ export default function ChangeStudentID() {
         class: "",
         studentId: ""
     })
-    const [error, setError] = useState<String>("")
+    const [error, setError] = useState<string>("")
+    const [changeButtonActive, setChangeButtonActive] = useState<boolean>(false)
 
     const changeInputValue = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
         const newValue = e.target.value;
@@ -55,7 +60,7 @@ export default function ChangeStudentID() {
                     </Wrap>
                     <ButtonWrap>
                         <CancelButton>취소</CancelButton>
-                        <CompleteButton>완료</CompleteButton>
+                        <CompleteButton changeButtonActive={changeButtonActive}>완료</CompleteButton>
                     </ButtonWrap>
                 </Contents>
             </Container>
@@ -153,13 +158,13 @@ font-size: 1em;
 }
 `
 
-const CompleteButton = styled.div`
+const CompleteButton = styled.div<ChangeButtonProps>`
 width: 175px;
 height: 52px;
 border: none;
 border-radius: 0.75em;
-background-color: ${colors.Main};
-color: #fff;
+background-color: ${({changeButtonActive}) => changeButtonActive? colors.Main : colors.Gray["gray 200"]};
+color: ${({changeButtonActive}) => changeButtonActive? colors.White : colors.gray2};
 display: flex;
 justify-content: center;
 align-items: center;
@@ -167,6 +172,6 @@ font-family: 'Pretendard-Medium';
 font-size: 1em;
 
 &:hover {
-    background-color: ${colors.Blue["main 600"]};
+    background-color:${({changeButtonActive}) => changeButtonActive? colors.Main : colors.Gray["gray 300"]};
 }
 `
