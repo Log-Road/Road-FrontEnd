@@ -1,11 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { colors } from "../styles/colors"
 import Header from "../components/Header";
 
+interface InfoItem {
+    info : string;
+    maxlength: number
+}
+
 export default function ChangeStudentID() {
 
-    const StudentInfo = ["학년", "학번", "번호"];
+    const StudentInfo: InfoItem[] = [
+        { info: "학년", maxlength : 1},
+        { info: "반", maxlength: 1}, 
+        { info: "번호", maxlength: 2}
+    ];
+
+    const [studentData, setStudentData] = useState({
+        grade: "",
+        class: "",
+        studentId: ""
+    })
+
+    const changeInputValue = (e: React.ChangeEvent<HTMLInputElement>, info: string) => {
+        const newValue = e.target.value;
+        setStudentData({ ...studentData, [info]: newValue });
+    }
+    
 
     return (
         <Container>
@@ -16,8 +37,11 @@ export default function ChangeStudentID() {
                     <Wrap>
                         {StudentInfo.map((value, index) => (
                             <InputWrap key={index}>
-                                <Input />
-                                <InnerText>{value}</InnerText>
+                                <Input 
+                                onChange={(e) => changeInputValue(e, value.info)} 
+                                maxLength={value.maxlength}
+                                />
+                                <InnerText>{value.info}</InnerText>
                             </InputWrap>
                         ))}
                         <ErrorMessage>오류메세지 입니다</ErrorMessage>
