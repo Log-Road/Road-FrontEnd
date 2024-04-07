@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { colors } from "../styles/colors";
-import BorderBtn from "../components/BorderBtn";
+import BorderBtn from "../components/Button/BorderBtn";
 
 export default function SelectUser () {
   return (
