@@ -12,7 +12,7 @@ export default function UpdateButton() {
 
 const Button = styled.button`
 width: 4em;
-height: 2em;
+height: 2.2em;
 display: flex;
 justify-content: center;
 align-items: center;
