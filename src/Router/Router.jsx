@@ -10,6 +10,7 @@ import ChangePassWord from "../pages/ChangePassWord";
 import InformationPersonnel from "../pages/Admin/InformationPersonnel";
 import StudentInfoEdit from "../pages/Admin/StudentInfoEdit";
 import ClubManagement from "../pages/Admin/ClubManagement";
+import ClubAdd from "../pages/Admin/ClubAdd";
 
 export default function Router() {
   return (
@@ -25,6 +26,7 @@ export default function Router() {
         <Route path="/informationPersonnel" element={<InformationPersonnel />}/>
         <Route path="/studentInfoEdit" element={<StudentInfoEdit/>} />
         <Route path="/clubManagement" element={<ClubManagement/>} />
+        <Route path="/clubAdd" element={<ClubAdd/>} />
       </Routes>
     </BrowserRouter>
   );
