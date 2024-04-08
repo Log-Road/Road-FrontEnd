@@ -6,31 +6,37 @@ import DeleteButton from "../../components/Button/DeleteButton";
 import UpdateButton from "../../components/Button/UpdateButton";
 
 export default function ClubManagement() {
+  const ClubData = [
+    { name: "Log" },
+    { name: "대동여지도" },
+    { name: "노네임드" },
+  ];
+
   return (
     <Container>
       <Header />
 
       <InnerContainer>
         <Contents>
-         
           <TopWrap>
             <Title>동아리 관리</Title>
             <PlusButton />
           </TopWrap>
 
           <InfoWrap>
-            <ClubWrap>
-              <CheckWrap>
-                <input type="checkbox" />
-                <label>뭐시깽이 동아리</label>
-              </CheckWrap>
+            {ClubData.map((value, index) => (
+              <ClubWrap id={index}>
+                <CheckWrap>
+                  <input type="checkbox" />
+                  <label>{value.name}</label>
+                </CheckWrap>
 
-              <ButtonWrap>
-                <DeleteButton />
-                <UpdateButton />
-              </ButtonWrap>
-            
-            </ClubWrap>
+                <ButtonWrap>
+                  <DeleteButton />
+                  <UpdateButton />
+                </ButtonWrap>
+              </ClubWrap>
+            ))}
           </InfoWrap>
         </Contents>
       </InnerContainer>
@@ -39,7 +45,7 @@ export default function ClubManagement() {
 }
 
 const Container = styled.div`
-  width: 100%;
+  width: 100vw;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -55,10 +61,10 @@ const InnerContainer = styled.div`
 `;
 
 const Contents = styled.div`
-  width: 600px;
+  width: 34.375%;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 2.5em;
 `;
 
 const TopWrap = styled.div`
@@ -70,24 +76,24 @@ const TopWrap = styled.div`
 const InfoWrap = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 1.75em;
 `;
 
 const ClubWrap = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 10px;
+  padding: 0 0.63em;
 `;
 
 const ButtonWrap = styled.div`
   display: flex;
-  gap: 12px;
+  gap: 0.75em;
 `;
 
 const CheckWrap = styled.div`
   display: flex;
-  gap: 16px;
+  gap: 1em;
 `;
 
 const Title = styled.p`
