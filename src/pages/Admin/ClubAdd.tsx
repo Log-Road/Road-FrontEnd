@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { colors } from "../../styles/colors";
 import Header from "../../components/Header";
@@ -8,7 +8,20 @@ import Header from "../../components/Header";
  * @returns 동아리 추가 페이지
  */
 
+interface AddProps {
+    possibleAdd : boolean
+}
+
 export default function ClubAdd() {
+
+    const [clubName, setClubName] = useState<string>("")
+    const [possibleAdd, setPossibleAdd] = useState<boolean>(false)
+
+    const ChangeInput = (e) => {
+        setClubName(e.target.value)
+        setPossibleAdd(e.target.value !== "");
+    }
+    
     return (
         <Container>
             <Header />
@@ -19,9 +32,9 @@ export default function ClubAdd() {
                     <SubTitle>동아리 추가</SubTitle>
                 </TopWrap>
 
-                <Input placeholder="동아리 이름" />
+                <Input placeholder="동아리 이름" onChange={(e) => ChangeInput(e)}/>
 
-                <Button>동아리 추가</Button>
+                <Button possibleAdd={possibleAdd}>동아리 추가</Button>
             </Contents>
         </Container>
     )
@@ -64,7 +77,7 @@ font-size: 1em;
   }
 `
 
-const Button = styled.button`
+const Button = styled.button<AddProps>`
 width: 22.5em;
 height: 3.25em;
 border: none;
