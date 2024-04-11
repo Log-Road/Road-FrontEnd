@@ -7,6 +7,8 @@ export default function HeaderAdmin() {
 
     const navigate = useNavigate();
 
+    const Items = ["동아리 관리", "글 관리", "인원정보", "대회관리"]
+
     return (
         <Container>
             <Contents>
@@ -14,10 +16,11 @@ export default function HeaderAdmin() {
                 <Logo onClick={() => { navigate("/") }}>ROAD</Logo>
 
                 <ItemWrap>
-                    <HandleText onClick={() => { navigate("/") }}>동아리 관리</HandleText>
-                    <HandleText onClick={() => { navigate("/") }}>글 관리</HandleText>
-                    <HandleText onClick={() => { navigate("/") }}>인원정보</HandleText>
-                    <HandleText onClick={() => { navigate("/") }}>대회관리</HandleText>
+                    {
+                     Items.map((value, index) => (
+                        <HandleText onClick={() => { navigate("/") }} >{value}</HandleText>
+                     ))
+                    }
                 </ItemWrap>
             </Contents>
 
