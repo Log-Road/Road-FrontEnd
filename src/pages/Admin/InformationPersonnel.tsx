@@ -4,7 +4,12 @@ import { colors } from "../../styles/colors"
 import Header from "../../components/Header";
 import Search from "../../assets/Search.svg"
 import Upload from "../../assets/Upload.svg"
-import UpdateButton from "../../components/Button/UpdateButton"
+import UpdateButton from "../../components/Button/HandleButton"
+
+/**
+ * 
+ * @returns 인원 정보 및 관리 페이지
+ */
 
 export default function InformationPersonnel() {
     return (
