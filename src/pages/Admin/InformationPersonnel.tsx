@@ -4,6 +4,7 @@ import { colors } from "../../styles/colors"
 import Header from "../../components/Header";
 import Search from "../../assets/Search.svg"
 import Upload from "../../assets/Upload.svg"
+import UpdateButton from "../../components/Button/UpdateButton"
 
 export default function InformationPersonnel() {
     return (
@@ -37,7 +38,7 @@ export default function InformationPersonnel() {
                                 <StudentID>1학년 1반 11번</StudentID>
                                 <State>재학중</State>
                             </StudentInfoWrap>
-                            <EditButton>수정하기</EditButton>
+                            <UpdateButton/>
                         </FlexWrap>
                     </InfoWrap>
 
@@ -104,20 +105,6 @@ display: flex;
 justify-content: center;
 align-items: center;
 gap: 0.75em;
-`
-
-const EditButton = styled.button`
-width: 66px;
-height: 30px;
-display: flex;
-justify-content: center;
-align-items: center;
-background-color: ${colors.White};
-border: 0.06em solid ${colors.Blue["main 200"]};
-border-radius: 0.63em;
-color: ${colors.Main};
-font-family: 'Pretendard-Regular';
-font-size: 0.85em;
 `
 
 const SearchInput = styled.input`
