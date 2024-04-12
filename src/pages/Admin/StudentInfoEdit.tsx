@@ -5,13 +5,19 @@ import Header from "../../components/Header";
 import UpArrow from "../../assets/UpArrow.svg"
 import DownArrow from "../../assets/DownArrow.svg"
 
-const StudentData = {
-    grade: ["학년", 1],
-    class: ["반", 1],
-    StudentId: ["학번", 10]
-}
+/**
+ * 
+ * @returns 학생 정보 수정 페이지
+ */
 
 export default function StudentInfoEdit() {
+
+    const StudentData = {
+        grade: ["학년", 1],
+        class: ["반", 1],
+        StudentId: ["학번", 10]
+    }
+
     return (
         <Container>
             <Header />

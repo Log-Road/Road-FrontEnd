@@ -2,10 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import Header from "../../components/Header";
 import PlusButton from "../../components/Button/PlusButton";
-import DeleteButton from "../../components/Button/DeleteButton";
-import UpdateButton from "../../components/Button/UpdateButton";
+import HandleButton from "../../components/Button/HandleButton";
+
+/**
+ * 
+ * @returns 동아리 관리 페이지
+ */
 
 export default function ClubManagement() {
+
   const ClubData = [
     { name: "Log" },
     { name: "대동여지도" },
@@ -20,7 +25,7 @@ export default function ClubManagement() {
         <Contents>
           <TopWrap>
             <Title>동아리 관리</Title>
-            <PlusButton />
+            <PlusButton text="동아리 추가"/>
           </TopWrap>
 
           <InfoWrap>
@@ -28,12 +33,12 @@ export default function ClubManagement() {
               <ClubWrap id={index}>
                 <CheckWrap>
                   <input type="checkbox" />
-                  <label>{value.name}</label>
+                  <p>{value.name}</p>
                 </CheckWrap>
 
                 <ButtonWrap>
-                  <DeleteButton />
-                  <UpdateButton />
+                  <HandleButton text="삭제"/>
+                  <HandleButton text="수정"/>
                 </ButtonWrap>
               </ClubWrap>
             ))}
@@ -91,7 +96,7 @@ const ButtonWrap = styled.div`
   gap: 0.75em;
 `;
 
-const CheckWrap = styled.div`
+const CheckWrap = styled.label`
   display: flex;
   gap: 1em;
 `;
