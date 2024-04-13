@@ -12,12 +12,19 @@ import HandleButton from "../../components/Button/HandleButton";
  */
 
 export default function InformationPersonnel() {
+
+    const studentData = [ //백엔드에서 받아올 학생 정보
+        { name: "삐덕이", studentId: "2학년 2반 17번", state: "재학중" },
+        { name: "홍길동", studentId: "2학년 1반 11번", state: "유급" },
+        { name: "신사임당", studentId: "3학년 1반 11번", state: "졸업" },
+    ]
+
     return (
         <Container>
             <Header />
             <InnerContainer>
                 <Contents>
-                    
+
                     <Title>인원 정보 및 관리</Title>
 
                     <SearchWrap>
@@ -37,14 +44,16 @@ export default function InformationPersonnel() {
                     </FileUploadWrap>
 
                     <InfoWrap>
-                        <FlexWrap>
-                            <StudentInfoWrap>
-                                <Name>홍길동</Name>
-                                <StudentID>1학년 1반 11번</StudentID>
-                                <State>재학중</State>
-                            </StudentInfoWrap>
-                            <HandleButton text="수정"/>
-                        </FlexWrap>
+                        {studentData.map((value, index) => (
+                            <FlexWrap>
+                                <StudentInfoWrap>
+                                    <Name>{value.name}</Name>
+                                    <StudentID>{value.studentId}</StudentID>
+                                    <State>{value.state}</State>
+                                </StudentInfoWrap>
+                                <HandleButton text="수정" />
+                            </FlexWrap>
+                        ))}
                     </InfoWrap>
 
                 </Contents>
@@ -54,11 +63,8 @@ export default function InformationPersonnel() {
 }
 
 const Container = styled.div`
-width: 100%;
-height: 100%;
-display: flex;
-flex-direction: column;
-gap: 1.25em;
+width: 100vw;
+height: 100vh;
 `
 
 const InnerContainer = styled.div`
@@ -66,7 +72,6 @@ width: 100%;
 height: 100%;
 display: flex;
 justify-content: center;
-align-items: center;
 `
 
 const Contents = styled.div`
