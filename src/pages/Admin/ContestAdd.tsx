@@ -1,54 +1,40 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { colors } from "../../styles/colors";
-import Header from "../../components/Header";
+import Header from "../../components/HeaderAdmin";
 
 /**
  * 
  * @returns 대회 추가 페이지
  */
 
-interface NextProps {
-    possibleNext : boolean
+interface AddProps {
+    possibleAdd: boolean
 }
 
 export default function ContestAdd() {
 
-    const AwardData = [
-        { name: "대상", count: 1 },
-        { name: "은상", count: 1 },
-        { name: "동상", count: 1 },
-        { name: "인기상", count: 1 },
-    ]
-    const [possibleNext, setPossibleNext] = useState(false)
+    const [possibleAdd, setPossibleAdd] = useState<boolean>(false)
 
     return (
         <Container>
             <Header />
+
             <Contents>
                 <TopWrap>
                     <Title>ROAD</Title>
-                    <SubTitle>동아리 추가</SubTitle>
+                    <SubTitle>대회 추가</SubTitle>
                 </TopWrap>
 
-                <Wrap>
-                    {AwardData.map((value, index) => (
-                        <InputWrap>
-                            <Input/>
-                            <InnerLeftText>{value.name}</InnerLeftText>
-                            <InnerRightText>개</InnerRightText>
-                        </InputWrap >
-                    ))}
-                    <AddAwardWrap>
-                        <AddText>+ 상 추가하기</AddText>
-                    </AddAwardWrap>
-                </Wrap>
+                <ContentWrap>
+                    <Input placeholder="동아리 이름" />
+                    <DateInputWrap>
+                        <DateInput type="date" id="startDate" />
+                        <DateInput type="date" id="lastDate" />
+                    </DateInputWrap>
+                </ContentWrap>
 
-                <BtnWrap>
-                    <NextButton possibleNext={possibleNext}>다음</NextButton>
-                    <SkipText>수상없이 진행하기</SkipText>
-                </BtnWrap>
-
+                <Button possibleAdd={possibleAdd}>동아리 추가</Button>
             </Contents>
         </Container>
     )
@@ -66,7 +52,7 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-gap: 3em;
+gap: 5em;
 `
 
 const TopWrap = styled.div`
@@ -76,32 +62,15 @@ align-items: center;
 gap: 0.44em;
 `
 
-const Wrap = styled.div`
+const ContentWrap = styled.div`
 display: flex;
 flex-direction: column;
-gap: 0.5em;
+gap: 8px;
 `
 
-const BtnWrap = styled.div`
+const DateInputWrap = styled.div`
 display: flex;
-flex-direction: column;
-align-items: center;
-gap: 0.75em;
-`
-
-const InputWrap = styled.div`
-position: relative;
-`
-
-const AddAwardWrap = styled.div`
-width: 100%;
-
-display: flex;
-align-items: center;
-gap: 5px;
-padding: 16px 24px;
-border: 1px solid ${colors.Gray["gray 200"]};
-border-radius: 12px;
+justify-content: space-between;
 `
 
 const Input = styled.input`
@@ -109,7 +78,7 @@ width: 22.5em;
 height: 3.38em;
 border: 0.08em solid ${colors.Gray["gray 200"]};
 border-radius: 0.75em;
-padding: 16px 60px;
+padding: 0 1.5em;
 font-family: 'Pretendard-Regular';
 font-size: 1em;
 
@@ -119,13 +88,28 @@ font-size: 1em;
   }
 `
 
-const NextButton = styled.button<NextProps>`
+const DateInput = styled.input`
+    width: 175px;
+    height: 56px;
+    border: 0.08em solid ${colors.Gray["gray 200"]};
+    border-radius: 0.75em;
+    padding: 0 1.5em;
+    font-family: 'Pretendard-Regular';
+    font-size: 1em;
+
+&:focus {
+    border-color: ${colors.Main};
+    outline: none;
+  }
+`
+
+const Button = styled.button<AddProps>`
 width: 22.5em;
 height: 3.25em;
 border: none;
 border-radius: 0.75em;
-background-color: ${({ possibleNext }) => possibleNext ? colors.Main : colors.Gray["gray 200"]};
-color: ${({ possibleNext }) => (possibleNext ? "#fff" : colors.gray2)};
+background-color: ${({ possibleAdd }) => possibleAdd ? colors.Main : colors.Gray["gray 200"]};
+color: ${({ possibleAdd }) => (possibleAdd ? "#fff" : colors.gray2)};
 display: flex;
 justify-content: center;
 align-items: center;
@@ -133,29 +117,11 @@ font-family: 'Pretendard-Medium';
 font-size: 1em;
 
 &:hover {
-    background-color: ${({ possibleNext }) => possibleNext ? colors.Blue["main 600"] : colors.Gray["gray 300"]};
+    background-color: ${({ possibleAdd }) => possibleAdd ? colors.Blue["main 600"] : colors.Gray["gray 300"]};
 }
 `
 
-const InnerLeftText = styled.p`
-position: absolute;
-top: 1.1em;
-left: 1.50em;
-font-family: 'Pretendard-Regular';
-font-size: 1em;
-color: ${colors.gray2};
-`
-
-const InnerRightText = styled.p`
-position: absolute;
-top: 1.1em;
-right: 1.50em;
-font-family: 'Pretendard-Regular';
-font-size: 1em;
-color: ${colors.gray2};
-`
-
-const Title = styled.p`
+const Title = styled.text`
 font-family: 'Pretendard-Bold';
 font-size: 2.25em;
 line-height: 120%;
@@ -166,21 +132,3 @@ font-family: 'Pretendard-Regular';
 font-size: 1em;
 line-height: 140%;
 `
-
-const AddText = styled.p`
-font-family: 'Pretendard-Regular';
-font-size: 1em;
-color: ${colors.Main};
-`
-
-const SkipText = styled.p`
-font-family: 'Pretendard-Regular';
-font-size: 1em;
-color: ${colors.gray1};
-
-&:hover {
-    color: ${colors.gray2};
-}
-`
-
-const Icon = styled.img``

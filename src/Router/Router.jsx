@@ -13,6 +13,10 @@ import InformationPersonnel from "../pages/Admin/InformationPersonnel";
 import StudentInfoEdit from "../pages/Admin/StudentInfoEdit";
 import ClubManagement from "../pages/Admin/ClubManagement";
 import ClubAdd from "../pages/Admin/ClubAdd";
+import ClubUpdate from "../pages/Admin/ClubUpdate";
+import AwardAdd from "../pages/Admin/AwardAdd";
+import ContestManagement from "../pages/Admin/ContestManagement";
+import ContestAdd from "../pages/Admin/ContestAdd";
 
 export default function Router() {
   return (
@@ -31,6 +35,10 @@ export default function Router() {
         <Route path="/studentInfoEdit" element={<StudentInfoEdit/>} />
         <Route path="/clubManagement" element={<ClubManagement/>} />
         <Route path="/clubAdd" element={<ClubAdd/>} />
+        <Route path="/clubUpdate" element={<ClubUpdate/>} />
+        <Route path="/awardAdd" element={<AwardAdd/>} />
+        <Route path="/contestManagement" element={<ContestManagement/>} />
+        <Route path="/contestAdd" element={<ContestAdd/>} />
       </Routes>
     </BrowserRouter>
   );
