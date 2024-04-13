@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import HeaderAdmin from "../../components/HeaderAdmin";
+import Header from "../../components/HeaderAdmin";
 import PlusButton from "../../components/Button/PlusButton";
 import HandleButton from "../../components/Button/HandleButton";
 import { colors } from "../../styles/colors";
@@ -30,7 +30,7 @@ export default function ContestManagement() {
 
     return (
         <Container>
-            <HeaderAdmin />
+            <Header />
 
             <InnerContainer>
                 <Contents>

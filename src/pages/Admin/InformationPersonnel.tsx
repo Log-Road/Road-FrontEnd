@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { colors } from "../../styles/colors"
-import Header from "../../components/Header";
+import Header from "../../components/HeaderAdmin";
 import Search from "../../assets/Search.svg"
 import Upload from "../../assets/Upload.svg"
-import UpdateButton from "../../components/Button/HandleButton"
+import HandleButton from "../../components/Button/HandleButton";
 
 /**
  * 
@@ -43,7 +43,7 @@ export default function InformationPersonnel() {
                                 <StudentID>1학년 1반 11번</StudentID>
                                 <State>재학중</State>
                             </StudentInfoWrap>
-                            <UpdateButton/>
+                            <HandleButton text="수정"/>
                         </FlexWrap>
                     </InfoWrap>
 

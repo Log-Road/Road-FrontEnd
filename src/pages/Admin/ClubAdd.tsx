@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { colors } from "../../styles/colors";
-import Header from "../../components/Header";
+import Header from "../../components/HeaderAdmin";
 
 /**
  * 

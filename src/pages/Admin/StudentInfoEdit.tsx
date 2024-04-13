@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { colors } from "../../styles/colors"
-import Header from "../../components/Header";
-import UpArrow from "../../assets/UpArrow.svg"
+import Header from "../../components/HeaderAdmin";
 import DownArrow from "../../assets/DownArrow.svg"
 
 /**
