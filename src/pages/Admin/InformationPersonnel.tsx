@@ -68,22 +68,26 @@ height: 100vh;
 `
 
 const InnerContainer = styled.div`
-width: 100%;
-height: 100%;
 display: flex;
 justify-content: center;
 `
 
 const Contents = styled.div`
-display: flex;
-flex-direction: column;
-gap: 1.25em;
-`
+    width: 50%;
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25em;
+
+    @media screen and (max-width: 768px) {
+        width: 70%;
+    }
+`;
 
 const SearchWrap = styled.div`
 position: relative;
-width: 37.5em;
-height: 3.5em;
+width: 100%;
 `
 
 const FileUploadWrap = styled.div`
@@ -105,7 +109,7 @@ gap: 1.75em;
 `
 
 const FlexWrap = styled.div`
-width: 35em;
+width: 100%;
 display: flex;
 justify-content: space-between;
 `
