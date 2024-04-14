@@ -41,8 +41,8 @@ export default function StudentInfoEdit() {
         const {name, value} = e.target
         setStudentInfo({
             ...studentInfo,
-            [name] : Number(value)
-        });
+            [name] : value === "" ? "" : Number(value)
+        })
     }
 
     const ClickButton = () => {
