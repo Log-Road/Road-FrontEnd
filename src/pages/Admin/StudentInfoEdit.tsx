@@ -55,11 +55,8 @@ export default function StudentInfoEdit() {
     }
 
     const ClickButton = () => {
-        console.log(studentInfo) //체크용
-        console.log(studentState) //이것또한 체크용
-
         const inputRegex = /^\d*$/;
-        Object.values(studentInfo).forEach(function (value) {
+        Object.values(studentInfo).forEach(function (value) { //학생 정보 값이 유효한지 확인 (비어있는가? 숫자인가?)
             if (value === "") {
                 setError(true)
                 console.log("빈공간")
@@ -101,7 +98,11 @@ export default function StudentInfoEdit() {
                         {showOption &&
                             <SelectWrap>
                                 {OptionData.map((value, index) => (
-                                    <SelectContent key={index}>{value.name}</SelectContent>
+                                    <SelectContent
+                                        key={index}
+                                        onClick={() => setStudentState(value.name)}
+                                    >{value.name}
+                                    </SelectContent>
                                 ))}
                             </SelectWrap>
                         }
