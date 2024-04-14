@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { colors } from "../../styles/colors"
 import Header from "../../components/HeaderAdmin";
 import DownArrow from "../../assets/DownArrow.svg"
+import { useNavigate } from "react-router-dom";
 
 /**
  * 
@@ -16,6 +17,8 @@ interface StudentInfo {
 }
 
 export default function StudentInfoEdit() {
+
+    const navigate = useNavigate()
 
     const StudentData = [ //input에 돌릴 데이터 값
         { label: "학년", info : "grade", maxlength: 1 },
@@ -31,22 +34,36 @@ export default function StudentInfoEdit() {
         { name: "휴학", value: "takeOff" }
     ]
 
+    const [error, setError] = useState<boolean>(false)
     const [studentInfo, setStudentInfo] = useState<StudentInfo>({ //백엔드에서 가져온 값 초기 값으로 넣기!!
         grade: 2,
         classNumber: 2,
         studentId: 16 
     })
 
+
     const InputChange = (e: React.ChangeEvent<HTMLInputElement>): void => { //인풋창 값을 수정할 시 학생 정보가 변경됨
         const {name, value} = e.target
         setStudentInfo({
             ...studentInfo,
-            [name] : value === "" ? "" : Number(value)
+            [name] : value
         })
     }
 
     const ClickButton = () => {
-        console.log(studentInfo)
+        console.log(studentInfo) //체크용
+
+        const inputRegex = /^\d*$/;
+        Object.values(studentInfo).forEach(function(value) {
+            if(value === "") {
+                setError(true)
+                console.log("빈공간 있음")
+            }
+            else if(!inputRegex.test(value)) {
+                setError(true)
+                console.log("입력 형식이 올바르지 않습니다")
+            }
+        })
     }
 
     return (
@@ -88,7 +105,7 @@ export default function StudentInfoEdit() {
                 </Wrap>
 
                 <ButtonWrap>
-                    <BackButton>뒤로가기</BackButton>
+                    <BackButton onClick={(e) => navigate("/informationPersonnel")}>뒤로가기</BackButton>
                     <SuccessButton onClick={ClickButton}>완료</SuccessButton>
                 </ButtonWrap>
 
