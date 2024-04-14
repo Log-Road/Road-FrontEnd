@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import styled from "styled-components";
 import { colors } from "../../styles/colors"
 import Header from "../../components/HeaderAdmin";
@@ -11,11 +11,19 @@ import DownArrow from "../../assets/DownArrow.svg"
 
 export default function StudentInfoEdit() {
 
-    const StudentData = {
-        grade: ["학년", 1],
-        class: ["반", 1],
-        StudentId: ["학번", 10]
-    }
+    const StudentData = [
+        { "학년": 1 },
+        { "반": 1 },
+        { "학번": 1 },
+    ]
+
+    const OptionData = [
+        { name: "재학생", value: "students" },
+        { name: "졸업생", value: "graduate" },
+        { name: "자퇴", value: "dropOut" },
+        { name: "전학", value: "students" },
+        { name: "휴학", value: "students" }
+    ]
 
     return (
         <Container>
@@ -29,22 +37,23 @@ export default function StudentInfoEdit() {
 
                 <Wrap>
                     {
-                        Object.keys(StudentData).map((key, index) => (
+                        StudentData.map((value, index) => (
                             <InputWrap key={index}>
-                                <Input/>
-                                <Text>{StudentData[key][0]}</Text>
+                                <Input />
+                                <Text>{Object.keys(value)}</Text>
                             </InputWrap>
                         ))
                     }
 
                     <DropBoxWrap>
-                        <Select name="state">
-                            <Option value="students">재학생</Option>
-                            <Option value="graduate">졸업생</Option>
-                            <Option value="graduate">자퇴</Option>
-                            <Option value="graduate">전학</Option>
-                            <Option value="graduate">휴학</Option>
+                        <Select>
+                            {
+                                OptionData.map((value, index) => (
+                                    <option key={index} value={value.value}>{value.name}</option>
+                                ))
+                            }
                         </Select>
+                        
                         <ArrowIcon src={DownArrow} />
                     </DropBoxWrap>
                 </Wrap>
@@ -60,16 +69,13 @@ export default function StudentInfoEdit() {
 }
 
 const Container = styled.div`
-width: 100%;
-height: 100%;
-display: flex;
-flex-direction: column;
-gap: 6.88em;
+width: 100vw;
+height: 100vh;
 `
 
 const InnerContainer = styled.div`
 width: 100%;
-height: 100%;
+height: 80%;
 display: flex;
 flex-direction: column;
 justify-content: center;
@@ -80,6 +86,7 @@ gap: 2.81em;
 const TitleWrap = styled.div`
 display: flex;
 flex-direction: column;
+align-items: center;
 gap: 0.5em;
 `
 
@@ -181,8 +188,6 @@ appearance: none;
     border: 0.12em solid ${colors.Gray["gray 100"]};
 }
 `
-
-const Option = styled.option``
 
 const Title = styled.p`
 font-family: 'Pretendard-Bold';
