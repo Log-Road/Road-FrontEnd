@@ -182,7 +182,7 @@ const SelectWrap = styled.div`
 display: flex;
 flex-direction: column;
 gap: 8px;
-border-radius: 16px;
+border-radius: 8px;
 background-color: ${colors.White};
 box-shadow: 1px 9px 18px 0px #060f2728;
 `
@@ -193,8 +193,12 @@ height: 48px;
 padding: 16px 24px;
 display: flex;
 align-items: center;
-border-radius: 16px;
+border-radius: 8px;
 background-color: ${colors.White};
+
+&:hover {
+    background-color: ${colors.Gray["gray 50"]};
+}
 `
 
 
