@@ -1,7 +1,8 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { colors } from "../../styles/colors"
 import Header from "../../components/HeaderAdmin";
+import UpArrow from "../../assets/UpArrow.svg"
 import DownArrow from "../../assets/DownArrow.svg"
 import { useNavigate } from "react-router-dom";
 
@@ -21,9 +22,9 @@ export default function StudentInfoEdit() {
     const navigate = useNavigate()
 
     const StudentData = [ //input에 돌릴 데이터 값
-        { label: "학년", info : "grade", maxlength: 1 },
-        { label: "반", info : "classNumber", maxlength: 1 },
-        { label: "학번", info : "studentId", maxlength: 2 },
+        { label: "학년", info: "grade", maxlength: 1 },
+        { label: "반", info: "classNumber", maxlength: 1 },
+        { label: "학번", info: "studentId", maxlength: 2 },
     ]
 
     const OptionData = [ //option에 돌릴 데이터 값
@@ -34,32 +35,36 @@ export default function StudentInfoEdit() {
         { name: "휴학", value: "takeOff" }
     ]
 
-    const [error, setError] = useState<boolean>(false)
-    const [studentInfo, setStudentInfo] = useState<StudentInfo>({ //백엔드에서 가져온 값 초기 값으로 넣기!!
+    //백엔드에서 가져온 값 초기 값으로 넣기!!
+    const [studentInfo, setStudentInfo] = useState<StudentInfo>({ //학생 정보(학년, 반, 번호)
         grade: 2,
         classNumber: 2,
-        studentId: 16 
+        studentId: 16
     })
+    const [studentState, setStudentState] = useState<string>("재학생") //학생 상태 (재학, 졸업, 자퇴, 전학, 휴학
+    const [error, setError] = useState<boolean>(false) //에러발생 여부
+    const [showOption, setShowOption] = useState<boolean>(false) //옵션창 보이는지 안보이는지 상태
 
 
     const InputChange = (e: React.ChangeEvent<HTMLInputElement>): void => { //인풋창 값을 수정할 시 학생 정보가 변경됨
-        const {name, value} = e.target
+        const { name, value } = e.target
         setStudentInfo({
             ...studentInfo,
-            [name] : value
+            [name]: value
         })
     }
 
     const ClickButton = () => {
         console.log(studentInfo) //체크용
+        console.log(studentState) //이것또한 체크용
 
         const inputRegex = /^\d*$/;
-        Object.values(studentInfo).forEach(function(value) {
-            if(value === "") {
+        Object.values(studentInfo).forEach(function (value) {
+            if (value === "") {
                 setError(true)
-                console.log("빈공간 있음")
+                console.log("빈공간")
             }
-            else if(!inputRegex.test(value)) {
+            else if (!inputRegex.test(value)) {
                 setError(true)
                 console.log("입력 형식이 올바르지 않습니다")
             }
@@ -80,28 +85,29 @@ export default function StudentInfoEdit() {
                     {
                         StudentData.map((value, index) => (
                             <InputWrap key={index}>
-                                <Input 
-                                    type="text" 
+                                <Input
+                                    type="text"
                                     name={value.info}
-                                    value={studentInfo[value.info]} 
-                                    maxLength={value.maxlength} 
-                                    onChange={(e) => InputChange(e)}/>
+                                    value={studentInfo[value.info]}
+                                    maxLength={value.maxlength}
+                                    onChange={(e) => InputChange(e)} />
                                 <InnerText>{value.label}</InnerText>
                             </InputWrap>
                         ))
                     }
 
-                    <InputWrap>
-                        <Select>
-                            {
-                                OptionData.map((value, index) => (
-                                    <option key={index} value={value.value}>{value.name}</option>
-                                ))
-                            }
-                        </Select>
+                    <SelectBox>
+                        <CheckedValue onClick={() => setShowOption(!showOption)}>{studentState}</CheckedValue>
+                        {showOption &&
+                            <SelectWrap>
+                                {OptionData.map((value, index) => (
+                                    <SelectContent key={index}>{value.name}</SelectContent>
+                                ))}
+                            </SelectWrap>
+                        }
+                        {showOption ? <Icon src={UpArrow} /> : <Icon src={DownArrow} />}
+                    </SelectBox>
 
-                        <Icon src={DownArrow} />
-                    </InputWrap>
                 </Wrap>
 
                 <ButtonWrap>
@@ -141,6 +147,55 @@ position: relative;
 width: 25vw;
 height: 3.38em;
 `
+
+const SelectBox = styled.div`
+width: 100%;
+height: 56px;
+position: relative;
+display: flex;
+flex-direction: column;
+gap: 4px;
+`
+
+const CheckedValue = styled.div`
+width: 100%;
+height: 100%;
+display: flex;
+padding: 16px 24px;
+background-color: ${colors.White};
+border: 0.06em solid ${colors.Gray["gray 200"]};
+border-radius: 0.75em;
+font-family: 'Pretendard-Regular';
+font-size: 1em;
+line-height: 140%;
+outline: none;
+appearance: none;
+
+&:focus {
+    background-color: #fdfdfd;
+    border: 0.12em solid ${colors.Gray["gray 100"]};
+}
+`
+
+const SelectWrap = styled.div`
+display: flex;
+flex-direction: column;
+gap: 8px;
+border-radius: 16px;
+background-color: ${colors.White};
+box-shadow: 1px 9px 18px 0px #060f2728;
+`
+
+const SelectContent = styled.div`
+width: 100%;
+height: 48px;
+padding: 16px 24px;
+display: flex;
+align-items: center;
+border-radius: 16px;
+background-color: ${colors.White};
+`
+
 
 const ButtonWrap = styled.div`
 display: flex;
@@ -194,24 +249,6 @@ font-size: 1em;
 line-height: 140%;
 outline: none;
 padding: 1em 1.50em;
-
-&:focus {
-    background-color: #fdfdfd;
-    border: 0.12em solid ${colors.Gray["gray 100"]};
-}
-`
-
-const Select = styled.select`
-width: 100%;
-height: 100%;
-padding: 1em 1.50em;
-border: 0.06em solid ${colors.Gray["gray 200"]};
-border-radius: 0.75em;
-font-family: 'Pretendard-Regular';
-font-size: 1em;
-line-height: 140%;
-outline: none;
-appearance: none;
 
 &:focus {
     background-color: #fdfdfd;
