@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import { colors } from "../../styles/colors"
 import Header from "../../components/HeaderAdmin";
@@ -9,21 +9,45 @@ import DownArrow from "../../assets/DownArrow.svg"
  * @returns 학생 정보 수정 페이지
  */
 
+interface StudentInfo {
+    grade: number;
+    classNumber: number;
+    studentId: number;
+}
+
 export default function StudentInfoEdit() {
 
-    const StudentData = [
-        { label: "학년", info : 1, maxlength: 1 },
-        { label: "반", info : 1, maxlength: 1 },
-        { label: "학번", info : 1, maxlength: 2 },
+    const StudentData = [ //input에 돌릴 데이터 값
+        { label: "학년", info : "grade", maxlength: 1 },
+        { label: "반", info : "classNumber", maxlength: 1 },
+        { label: "학번", info : "studentId", maxlength: 2 },
     ]
 
-    const OptionData = [
+    const OptionData = [ //option에 돌릴 데이터 값
         { name: "재학생", value: "students" },
         { name: "졸업생", value: "graduate" },
         { name: "자퇴", value: "dropOut" },
-        { name: "전학", value: "students" },
-        { name: "휴학", value: "students" }
+        { name: "전학", value: "transfer" },
+        { name: "휴학", value: "takeOff" }
     ]
+
+    const [studentInfo, setStudentInfo] = useState<StudentInfo>({ //백엔드에서 가져온 값 초기 값으로 넣기!!
+        grade: 2,
+        classNumber: 2,
+        studentId: 16 
+    })
+
+    const InputChange = (e: React.ChangeEvent<HTMLInputElement>): void => { //인풋창 값을 수정할 시 학생 정보가 변경됨
+        const {name, value} = e.target
+        setStudentInfo({
+            ...studentInfo,
+            [name] : Number(value)
+        });
+    }
+
+    const ClickButton = () => {
+        console.log(studentInfo)
+    }
 
     return (
         <Container>
@@ -39,7 +63,12 @@ export default function StudentInfoEdit() {
                     {
                         StudentData.map((value, index) => (
                             <InputWrap key={index}>
-                                <Input maxLength={value.maxlength} />
+                                <Input 
+                                    type="text" 
+                                    name={value.info}
+                                    value={studentInfo[value.info]} 
+                                    maxLength={value.maxlength} 
+                                    onChange={(e) => InputChange(e)}/>
                                 <InnerText>{value.label}</InnerText>
                             </InputWrap>
                         ))
@@ -60,7 +89,7 @@ export default function StudentInfoEdit() {
 
                 <ButtonWrap>
                     <BackButton>뒤로가기</BackButton>
-                    <SuccessButton>완료</SuccessButton>
+                    <SuccessButton onClick={ClickButton}>완료</SuccessButton>
                 </ButtonWrap>
 
             </InnerContainer>
