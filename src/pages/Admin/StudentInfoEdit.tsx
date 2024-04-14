@@ -30,10 +30,10 @@ export default function StudentInfoEdit() {
             <Header />
             <InnerContainer>
 
-                <TitleWrap>
+                <Wrap>
                     <Title>ROAD</Title>
                     <SubTitle>홍길동 정보 수정</SubTitle>
-                </TitleWrap>
+                </Wrap>
 
                 <Wrap>
                     {
@@ -45,7 +45,7 @@ export default function StudentInfoEdit() {
                         ))
                     }
 
-                    <DropBoxWrap>
+                    <InputWrap>
                         <Select>
                             {
                                 OptionData.map((value, index) => (
@@ -53,9 +53,9 @@ export default function StudentInfoEdit() {
                                 ))
                             }
                         </Select>
-                        
+
                         <ArrowIcon src={DownArrow} />
-                    </DropBoxWrap>
+                    </InputWrap>
                 </Wrap>
 
                 <ButtonWrap>
@@ -83,41 +83,28 @@ align-items: center;
 gap: 2.81em;
 `
 
-const TitleWrap = styled.div`
+const Wrap = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
 gap: 0.5em;
 `
 
-const Wrap = styled.div`
-display: flex;
-flex-direction: column;
-gap: 0.5em;
-`
-
 const InputWrap = styled.div`
 position: relative;
-width: 22.50em;
-height: 3.38em;
-`
-
-const DropBoxWrap = styled.div`
-position: relative;
-width: 22.50em;
+width: 25vw;
 height: 3.38em;
 `
 
 const ButtonWrap = styled.div`
-width: 22.50em;
-height: 3.38em;
 display: flex;
-gap: 0.5em;
+justify-content: space-between;
+width: 25vw;
+height: 3.38em;
 `
 
 const BackButton = styled.div`
-width: 11em;
-height: 3.25em;
+width: 48%;
 display: flex;
 justify-content: center;
 align-items: center;
@@ -130,13 +117,11 @@ line-height: 140%;
 
 &:hover {
     background-color: ${colors.Gray["gray 50"]};
-    color: ${colors.Gray["gray 800"]};
 }
 `
 
 const SuccessButton = styled.div`
-width: 11em;
-height: 3.25em;
+width: 48%;
 display: flex;
 justify-content: center;
 align-items: center;
@@ -150,7 +135,6 @@ line-height: 140%;
 
 &:hover {
     background-color: ${colors.Blue["main 600"]};
-    color: ${colors.Gray["gray 50"]};
 }
 `
 
