@@ -12,9 +12,9 @@ import DownArrow from "../../assets/DownArrow.svg"
 export default function StudentInfoEdit() {
 
     const StudentData = [
-        { "학년": 1 },
-        { "반": 1 },
-        { "학번": 1 },
+        { label: "학년", info : 1, maxlength: 1 },
+        { label: "반", info : 1, maxlength: 1 },
+        { label: "학번", info : 1, maxlength: 2 },
     ]
 
     const OptionData = [
@@ -39,8 +39,8 @@ export default function StudentInfoEdit() {
                     {
                         StudentData.map((value, index) => (
                             <InputWrap key={index}>
-                                <Input />
-                                <Text>{Object.keys(value)}</Text>
+                                <Input maxLength={value.maxlength} />
+                                <InnerText>{value.label}</InnerText>
                             </InputWrap>
                         ))
                     }
@@ -54,7 +54,7 @@ export default function StudentInfoEdit() {
                             }
                         </Select>
 
-                        <ArrowIcon src={DownArrow} />
+                        <Icon src={DownArrow} />
                     </InputWrap>
                 </Wrap>
 
@@ -185,7 +185,7 @@ font-size: 1em;
 line-height: 140%;
 `
 
-const Text = styled.p`
+const InnerText = styled.p`
 position: absolute;
 top: 1em;
 right: 1.50em;
@@ -195,7 +195,7 @@ line-height: 140%;
 color: ${colors.gray2};
 `
 
-const ArrowIcon = styled.img`
+const Icon = styled.img`
 position: absolute;
 top: 1em;
 right: 1.5em;
