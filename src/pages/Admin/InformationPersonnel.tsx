@@ -73,7 +73,7 @@ justify-content: center;
 `
 
 const Contents = styled.div`
-    width: 50%;
+    width: 40%;
     max-width: 800px;
     margin: 0 auto;
     display: flex;
