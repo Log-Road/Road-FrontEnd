@@ -48,24 +48,35 @@ export default function StudentInfoEdit() {
 
     const InputChange = (e: React.ChangeEvent<HTMLInputElement>): void => { //인풋창 값을 수정할 시 학생 정보가 변경됨
         const { name, value } = e.target
+
         setStudentInfo({
             ...studentInfo,
-            [name]: value
+            [name]: value === "" ? "" : Number(value)
         })
     }
 
+    const SelectChange = (selectedOption: string) : void => {
+        setStudentState(selectedOption)
+        setShowOption(false)
+    }
+
     const ClickButton = () => {
-        const inputRegex = /^\d*$/;
+        const inputRegex = /^[0-20]*$/
+        let hasError = false;
         Object.values(studentInfo).forEach(function (value) { //학생 정보 값이 유효한지 확인 (비어있는가? 숫자인가?)
+            setError(false)
             if (value === "") {
-                setError(true)
-                console.log("빈공간")
+                hasError = true
+                return console.log("빈공간")
             }
             else if (!inputRegex.test(value)) {
-                setError(true)
-                console.log("입력 형식이 올바르지 않습니다")
+                hasError = true
+                return console.log("입력 형식이 올바르지 않습니다")
             }
         })
+        setError(hasError)
+        console.log(studentInfo)
+        console.log(error)
     }
 
     return (
@@ -100,7 +111,7 @@ export default function StudentInfoEdit() {
                                 {OptionData.map((value, index) => (
                                     <SelectContent
                                         key={index}
-                                        onClick={() => setStudentState(value.name)}
+                                        onClick={() => SelectChange(value.name)}
                                     >{value.name}
                                     </SelectContent>
                                 ))}
