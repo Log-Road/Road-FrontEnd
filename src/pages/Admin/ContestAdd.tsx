@@ -1,20 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { colors } from "../../styles/colors";
 import Header from "../../components/HeaderAdmin";
+import ActiveButton from "../../components/Button/ActiveButton"
 
 /**
  * 
  * @returns 대회 추가 페이지
  */
 
-interface AddProps {
-    possibleAdd: boolean
-}
-
 export default function ContestAdd() {
-
-    const [possibleAdd, setPossibleAdd] = useState<boolean>(false)
 
     return (
         <Container>
@@ -34,7 +29,7 @@ export default function ContestAdd() {
                     </DateInputWrap>
                 </ContentWrap>
 
-                <Button possibleAdd={possibleAdd}>동아리 추가</Button>
+                <ActiveButton text="대회 추가" active={false} />
             </Contents>
         </Container>
     )
@@ -63,9 +58,10 @@ gap: 0.44em;
 `
 
 const ContentWrap = styled.div`
+width: 25vw;
 display: flex;
 flex-direction: column;
-gap: 8px;
+gap: 0.5em;
 `
 
 const DateInputWrap = styled.div`
@@ -74,7 +70,7 @@ justify-content: space-between;
 `
 
 const Input = styled.input`
-width: 22.5em;
+width: 100%;
 height: 3.38em;
 border: 0.08em solid ${colors.Gray["gray 200"]};
 border-radius: 0.75em;
@@ -89,8 +85,8 @@ font-size: 1em;
 `
 
 const DateInput = styled.input`
-    width: 175px;
-    height: 56px;
+    width: 48%;
+    height: 3.38em;
     border: 0.08em solid ${colors.Gray["gray 200"]};
     border-radius: 0.75em;
     padding: 0 1.5em;
@@ -101,24 +97,6 @@ const DateInput = styled.input`
     border-color: ${colors.Main};
     outline: none;
   }
-`
-
-const Button = styled.button<AddProps>`
-width: 22.5em;
-height: 3.25em;
-border: none;
-border-radius: 0.75em;
-background-color: ${({ possibleAdd }) => possibleAdd ? colors.Main : colors.Gray["gray 200"]};
-color: ${({ possibleAdd }) => (possibleAdd ? "#fff" : colors.gray2)};
-display: flex;
-justify-content: center;
-align-items: center;
-font-family: 'Pretendard-Medium';
-font-size: 1em;
-
-&:hover {
-    background-color: ${({ possibleAdd }) => possibleAdd ? colors.Blue["main 600"] : colors.Gray["gray 300"]};
-}
 `
 
 const Title = styled.text`
