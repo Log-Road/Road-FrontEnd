@@ -11,7 +11,7 @@ export default function PlusButton({ text }: ButtonProps) {
     return (
         <Contents>
             <Icon src={Plus} />
-            <Text>동아리 추가</Text>
+            <Text>{text}</Text>
         </Contents>
     )
 }
