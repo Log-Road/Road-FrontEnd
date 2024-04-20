@@ -3,6 +3,10 @@ import styled from "styled-components";
 import { colors } from "../../styles/colors"
 import Plus from "../../assets/Plus.svg"
 
+/**
+ * 관리 페이지 추가 버튼
+ */
+
 interface ButtonProps {
     text: string;
 }
@@ -23,7 +27,6 @@ display: flex;
 justify-content: center;
 align-items: center;
 gap: 2px;
-background-color: ${colors.White};
 border: 1px solid ${colors.Gray["gray 200"]};
 border-radius: 12px;
 `
