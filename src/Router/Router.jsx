@@ -16,7 +16,7 @@ import ClubAdd from "../pages/Admin/ClubAdd";
 import ClubUpdate from "../pages/Admin/ClubUpdate";
 import AwardAdd from "../pages/Admin/AwardAdd";
 import ContestManagement from "../pages/Admin/ContestManagement";
-import ContestAdd from "../pages/Admin/ContestAdd";
+import ContestDetailsManagement from "../pages/Admin/ContestDetailsManagement";
 import AwardRegister from "../pages/Admin/AwardRegister";
 
 export default function Router() {
@@ -39,7 +39,7 @@ export default function Router() {
         <Route path="/clubUpdate" element={<ClubUpdate/>} />
         <Route path="/awardAdd" element={<AwardAdd/>} />
         <Route path="/contestManagement" element={<ContestManagement/>} />
-        <Route path="/contestAdd" element={<ContestAdd/>} />
+        <Route path="/contestDetailsManagement" element={<ContestDetailsManagement/>} />
         <Route path="/awardRegister" element={<AwardRegister/>} />
       </Routes>
     </BrowserRouter>

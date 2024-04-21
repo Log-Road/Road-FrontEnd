@@ -6,10 +6,10 @@ import ActiveButton from "../../components/Button/ActiveButton"
 
 /**
  * 
- * @returns 대회 추가 페이지
+ * @returns 대회 상세 정보 관리 페이지
  */
 
-export default function ContestAdd() {
+export default function ContestDetailsManagement() {
 
     return (
         <Container>
@@ -18,7 +18,7 @@ export default function ContestAdd() {
             <Contents>
                 <TopWrap>
                     <Title>ROAD</Title>
-                    <SubTitle>대회 추가</SubTitle>
+                    <SubTitle>대회 상세 정보 관리</SubTitle>
                 </TopWrap>
 
                 <ContentWrap>
@@ -29,7 +29,7 @@ export default function ContestAdd() {
                     </DateInputWrap>
                 </ContentWrap>
 
-                <ActiveButton text="대회 추가" active={false} />
+                <ActiveButton text="완료" active={false} />
             </Contents>
         </Container>
     )
