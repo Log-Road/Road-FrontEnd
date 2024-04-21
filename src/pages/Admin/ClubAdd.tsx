@@ -2,22 +2,19 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { colors } from "../../styles/colors";
 import Header from "../../components/HeaderAdmin";
+import ActiveButton from "../../components/Button/ActiveButton"
 
 /**
  * 
  * @returns 동아리 추가 페이지
  */
 
-interface AddProps {
-    possibleAdd : boolean
-}
-
 export default function ClubAdd() {
 
-    const [clubName, setClubName] = useState<string>("")
-    const [possibleAdd, setPossibleAdd] = useState<boolean>(false)
+    const [clubName, setClubName] = useState<string>("") //동아리 이름 저장
+    const [possibleAdd, setPossibleAdd] = useState<boolean>(false) //버튼 활성화 여부
 
-    const ChangeInput = (e) => {
+    const ChangeInput = (e) => { //입력시 값 변경
         setClubName(e.target.value)
         setPossibleAdd(e.target.value !== "");
     }
@@ -32,9 +29,8 @@ export default function ClubAdd() {
                     <SubTitle>동아리 추가</SubTitle>
                 </TopWrap>
 
-                <Input placeholder="동아리 이름" onChange={(e) => ChangeInput(e)}/>
-
-                <Button possibleAdd={possibleAdd}>동아리 추가</Button>
+                <Input placeholder="동아리 이름" value={clubName} onChange={(e) => ChangeInput(e)}/>
+                <ActiveButton text="동아리 추가" active={possibleAdd}/>
             </Contents>
         </Container>
     )
@@ -75,24 +71,6 @@ font-size: 1em;
     border-color: ${colors.Main};
     outline: none;
   }
-`
-
-const Button = styled.button<AddProps>`
-width: 22.5em;
-height: 3.25em;
-border: none;
-border-radius: 0.75em;
-background-color: ${({ possibleAdd }) => possibleAdd ? colors.Main : colors.Gray["gray 200"]};
-color: ${({ possibleAdd }) => (possibleAdd ? "#fff" : colors.gray2)};
-display: flex;
-justify-content: center;
-align-items: center;
-font-family: 'Pretendard-Medium';
-font-size: 1em;
-
-&:hover {
-    background-color: ${({ possibleAdd }) => possibleAdd ? colors.Blue["main 600"] : colors.Gray["gray 300"]};
-}
 `
 
 const Title = styled.text`
