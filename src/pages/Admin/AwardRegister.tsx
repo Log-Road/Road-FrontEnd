@@ -5,13 +5,7 @@ import Header from "../../components/HeaderAdmin";
 
 export default function AwardRegister() {
 
-    const AwardData = [
-        "금상",
-        "은상",
-        "동상",
-        "인기상",
-        "인기상"
-    ]
+    const AwardData = ["금상", "은상", "동상", "인기상", "인기상"]
 
     return (
         <Container>
@@ -33,8 +27,8 @@ export default function AwardRegister() {
                         {AwardData.map((value, index) => (
                             <ContentWrap>
                                 <AwardWrap>
-                                    <AwrardText>{index+1}</AwrardText>
-                                    <AwrardText>{value}</AwrardText>
+                                    <AwardText>{index+1}</AwardText>
+                                    <AwardText>{value}</AwardText>
                                 </AwardWrap>
 
                                 <select name="state">
@@ -59,33 +53,34 @@ export default function AwardRegister() {
 const Container = styled.div`
 width: 100vw;
 height: 100vh;
-background-color: ${colors.Gray["gray 50"]};
 `
 
 const InnerContainer = styled.div`
-width: 100%;
-height: 100%;
 display: flex;
 justify-content: center;
 `
 
 const Wrap = styled.div`
-width: 1029px;
-height: 721px;
-background-color: ${colors.White};
-border-radius: 20px;
+@media (max-width: 1500px) and (min-width: 500px){
+    width: 65%;
+}
+@media (max-width: 2100px) and (min-width: 1500px) {
+    width: 50%;
+}
 display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
+padding: 4% 0;
+border-radius: 20px;
+box-shadow: 0 0 10px 10px ${colors.Gray["gray 50"]};
 `
 
 const Content = styled.div`
-width: 741px;
-height: 606px;
+width: 80%;
 display: flex;
 flex-direction: column;
-gap: 20px;
+gap: 1.25em;
 `
 
 const TopWrap = styled.div`
@@ -95,7 +90,7 @@ justify-content: space-between;
 
 const ContestWrap = styled.div`
 display: flex;
-gap: 28px;
+gap: 1.25em;
 `
 
 const ContentWrap = styled.div`
@@ -103,41 +98,41 @@ display: flex;
 justify-content: space-between;
 border: 1px solid ${colors.Gray["gray 200"]};
 border-radius: 8px;
-padding: 15px 30px;
+padding: 0.94em 0 0.94em 1.88em;
 `
 
 const AwardWrap = styled.div`
 display: flex;
-gap: 20px;
+gap: 1.5em;
 `
 
 const ButtonWrap = styled.div`
 display: flex;
 justify-content: flex-end;
-gap: 10px;
+gap: 0.63em;
 `
 
 const CompleteButton = styled.button`
-width: 152px;
-height: 43px;
+width: 22%;
+height: 2.69em;
 color: ${colors.White};
 background-color: ${colors.Main};
 border: none;
-border-radius: 20px;
+border-radius: 24px;
 font-family: 'Pretendard-Bold';
-font-size: 18px;
+font-size: 1em;
 line-height: 120%;
 `
 
 const Button = styled.button`
-width: 176px;
-height: 52px;
+width: 27%;
+height: 2.5em;
 color: ${colors.gray2};
 background-color: ${colors.Gray["gray 100"]};
 border: none;
 border-radius: 12px;
 font-family: 'Pretendard-Bold';
-font-size: 18px;
+font-size: 1.15em;
 
 &:hover{
     background-color: ${colors.Gray["gray 200"]};
@@ -146,18 +141,18 @@ font-size: 18px;
 
 const Title = styled.p`
 font-family: 'Pretendard-Bold';
-font-size: 36px;
+font-size: 2em;
 line-height: 120%;
 `
 
 const ContestName = styled.p`
 font-family: 'Pretendard-Bold';
-font-size: 24px;
+font-size: 1.35em;
 line-height: 140%;
 `
 
-const AwrardText = styled.p`
+const AwardText = styled.p`
 font-family: 'Pretendard-Medium';
-font-size: 18px;
+font-size: 1em;
 line-height: 140%;
 `
