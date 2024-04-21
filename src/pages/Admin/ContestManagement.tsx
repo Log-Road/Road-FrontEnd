@@ -4,6 +4,7 @@ import Header from "../../components/HeaderAdmin";
 import PlusButton from "../../components/Button/PlusButton";
 import HandleButton from "../../components/Button/ManagementButton";
 import { colors } from "../../styles/colors";
+import { useNavigate } from "react-router-dom";
 
 /**
  * 
@@ -16,6 +17,8 @@ interface Props{
 
 export default function ContestManagement() {
 
+    const native = useNavigate()
+
     const ContestData = [ //백엔드에서 받아올 값 (임시로 값 지정함)
         { title: "뭐시깽이 대회", startDate: "2023.3.14", overDate: "2023.04.14", state: "진행중" },
         { title: "무슨무슨 대회", startDate: "2023.2.14", overDate: "2023.03.14", state: "시상 대기" },
@@ -23,9 +26,9 @@ export default function ContestManagement() {
     ];
 
     const showButton = (state) => { //대회 상태 (진행중/대기/완료)에 따라 나타나는 버튼 지정
-      if(state === "진행중") return <><HandleButton text="글보기" /><HandleButton text="수정" /></>;
-      else if(state === "시상 대기") return <><HandleButton text="글보기" /><HandleButton text="시상" /></>;
-      else if(state === "시상 완료") return <HandleButton text="결과" />;
+      if(state === "진행중") return <><HandleButton text="글보기" onClick={() => native("/")}/><HandleButton text="수정" onClick={() => native("/")}/></>;
+      else if(state === "시상 대기") return <><HandleButton text="글보기" onClick={() => native("/")}/><HandleButton text="시상" onClick={() => native("/")}/></>;
+      else if(state === "시상 완료") return <HandleButton text="결과" onClick={() => native("/")}/>;
     } 
 
     return (
@@ -37,7 +40,7 @@ export default function ContestManagement() {
 
                     <TopWrap>
                         <Title>대회 관리</Title>
-                        <PlusButton text="대회 추가" />
+                        <PlusButton text="대회 추가" onClick={() => native("/")}/>
                     </TopWrap>
 
                     <InfoWrap>

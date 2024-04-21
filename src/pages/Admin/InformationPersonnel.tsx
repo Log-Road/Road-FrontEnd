@@ -5,6 +5,7 @@ import Header from "../../components/HeaderAdmin";
 import Search from "../../assets/Search.svg"
 import Upload from "../../assets/Upload.svg"
 import HandleButton from "../../components/Button/ManagementButton";
+import { useNavigate } from "react-router-dom";
 
 /**
  * 
@@ -12,6 +13,8 @@ import HandleButton from "../../components/Button/ManagementButton";
  */
 
 export default function InformationPersonnel() {
+
+    const navigate = useNavigate()
 
     const studentData = [ //백엔드에서 받아올 학생 정보
         { name: "삐덕이", studentId: "2학년 2반 17번", state: "재학중" },
@@ -51,7 +54,7 @@ export default function InformationPersonnel() {
                                     <StudentID>{value.studentId}</StudentID>
                                     <State>{value.state}</State>
                                 </StudentInfoWrap>
-                                <HandleButton text="수정" />
+                                <HandleButton text="수정" onClick={() => navigate("/")}/>
                             </FlexWrap>
                         ))}
                     </InfoWrap>
