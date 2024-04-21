@@ -12,13 +12,18 @@ export default function AwardRegister() {
         { projectName: "ROAD" },
         { projectName: "프로젝트명입니다" },
         { projectName: "대마고프로젝트명명" },
+        { projectName: "뭐시기" },
+        { projectName: "프로젝트이름" },
     ]
 
-    const [selectProject, setSelectProject] = useState("프로젝트 선택") //선택된 프로젝트
-    const [openSelectIndex, setOpenSelectIndex] = useState<number | null>(null); //열린 selectBox 인덱스 저장
+    const [selectedProject, setSelectedProject] = useState<string[]>(Array(AwardData.length).fill("프로젝트 선택")); //선택된 프로젝트 저장
+    const [openSelectIndex, setOpenSelectIndex] = useState<number | null>(null); //열린 selectBox 인덱스 저장 (아무것도 열린 option창이 없다면 null 저장)
 
-    const SelectChange = (selectedOption: string): void => { //프로젝트 선택시 값 변경 
-        setSelectProject(selectedOption);
+    const SelectChange = (selectedOption: string, index: number): void => { //프로젝트 선택시 값 변경 
+        const newSelected = [...selectedProject];
+        newSelected[index] = selectedOption;
+        setSelectedProject(newSelected);
+        setOpenSelectIndex(null)
     };
 
     const toggleSelect = (index: number) => { //selectBox 열고 닫음
@@ -50,13 +55,12 @@ export default function AwardRegister() {
                                 </AwardWrap>
 
                                 <SelectBox>
-                                    <CheckedValue onClick={() => toggleSelect(index)}>{selectProject}</CheckedValue>
-                                    {openSelectIndex === index && 
+                                    <CheckedValue onClick={() => toggleSelect(index)}>{selectedProject[index]}</CheckedValue>
+                                    {openSelectIndex === index &&
                                         <SelectWrap>
-                                            {OptionData.map((value, index) => (
+                                            {OptionData.map((value) => (
                                                 <SelectContent
-                                                    key={index}
-                                                    onClick={() => SelectChange(value.projectName)}
+                                                    onClick={() => SelectChange(value.projectName, index)}
                                                 >{value.projectName}
                                                 </SelectContent>
                                             ))}
