@@ -1,11 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { colors } from "../../styles/colors";
 import Header from "../../components/HeaderAdmin";
+import UpArrow from "../../assets/UpArrow.svg"
+import DownArrow from "../../assets/DownArrow.svg"
 
 export default function AwardRegister() {
 
-    const AwardData = ["금상", "은상", "동상", "인기상", "인기상"]
+    const AwardData = ["금상", "은상", "동상", "인기상", "KOSA-MIDASIT 해커톤 우수상"] //시상할 상 목록
+    const OptionData = [ //option 값
+        { projectName: "ROAD" },
+        { projectName: "프로젝트명입니다" },
+        { projectName: "대마고프로젝트명명" },
+    ]
+
+    const [selectProject, setSelectProject] = useState("프로젝트 선택") //선택된 프로젝트
+    const [openSelectIndex, setOpenSelectIndex] = useState<number | null>(null); //열린 selectBox 인덱스 저장
+
+    const SelectChange = (selectedOption: string): void => { //프로젝트 선택시 값 변경 
+        setSelectProject(selectedOption);
+    };
+
+    const toggleSelect = (index: number) => { //selectBox 열고 닫음
+        setOpenSelectIndex(prevIndex => (prevIndex === index ? null : index));
+    };
 
     return (
         <Container>
@@ -27,15 +45,25 @@ export default function AwardRegister() {
                         {AwardData.map((value, index) => (
                             <ContentWrap>
                                 <AwardWrap>
-                                    <AwardText>{index+1}</AwardText>
+                                    <AwardText>{index + 1}</AwardText>
                                     <AwardText>{value}</AwardText>
                                 </AwardWrap>
 
-                                <select name="state">
-                                    <option value="students">ROAD</option>
-                                    <option value="students">ROADROAD</option>
-                                    <option value="students">집가는프로젝트</option>
-                                </select>
+                                <SelectBox>
+                                    <CheckedValue onClick={() => toggleSelect(index)}>{selectProject}</CheckedValue>
+                                    {openSelectIndex === index && 
+                                        <SelectWrap>
+                                            {OptionData.map((value, index) => (
+                                                <SelectContent
+                                                    key={index}
+                                                    onClick={() => SelectChange(value.projectName)}
+                                                >{value.projectName}
+                                                </SelectContent>
+                                            ))}
+                                        </SelectWrap>
+                                    }
+                                    {openSelectIndex === index ? <Icon src={UpArrow} /> : <Icon src={DownArrow} />}
+                                </SelectBox>
                             </ContentWrap>
                         ))}
 
@@ -96,14 +124,70 @@ gap: 1.25em;
 const ContentWrap = styled.div`
 display: flex;
 justify-content: space-between;
+align-items: center;
 border: 1px solid ${colors.Gray["gray 200"]};
 border-radius: 8px;
 padding: 0.94em 0 0.94em 1.88em;
+position: relative;
 `
 
 const AwardWrap = styled.div`
 display: flex;
 gap: 1.5em;
+`
+
+const SelectBox = styled.div`
+width: 60%;
+height: 100%;
+position: absolute;
+right: 0;
+display: flex;
+flex-direction: column;
+gap: 4px;
+`
+
+const CheckedValue = styled.div`
+width: 100%;
+height: 100%;
+display: flex;
+justify-content: right;
+padding: 16px 70px 16px 24px;
+background-color: ${colors.White};
+border-radius: 0.75em;
+font-family: 'Pretendard-Regular';
+font-size: 1em;
+line-height: 140%;
+outline: none;
+appearance: none;
+
+&:focus {
+    background-color: #fdfdfd;
+    border: 0.12em solid ${colors.Gray["gray 100"]};
+}
+`
+
+const SelectWrap = styled.div`
+display: flex;
+flex-direction: column;
+gap: 8px;
+border-radius: 8px;
+background-color: ${colors.White};
+box-shadow: 1px 9px 18px 0px #060f2728;
+z-index: 10;
+`
+
+const SelectContent = styled.div`
+width: 100%;
+height: 48px;
+padding: 16px 24px;
+display: flex;
+align-items: center;
+border-radius: 8px;
+background-color: ${colors.White};
+
+&:hover {
+    background-color: ${colors.Gray["gray 50"]};
+}
 `
 
 const ButtonWrap = styled.div`
@@ -155,4 +239,10 @@ const AwardText = styled.p`
 font-family: 'Pretendard-Medium';
 font-size: 1em;
 line-height: 140%;
+`
+
+const Icon = styled.img`
+position: absolute;
+top: 1em;
+right: 1.5em;
 `
