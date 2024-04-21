@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Header from "../../components/HeaderAdmin";
 import PlusButton from "../../components/Button/PlusButton";
-import HandleButton from "../../components/Button/HandleButton";
+import HandleButton from "../../components/Button/ManagementButton";
 import Checked from "../../assets/Checked.svg"
 import { useNavigate } from "react-router-dom";
 
@@ -30,6 +30,16 @@ export default function ClubManagement() {
   useEffect(() => { //체크된 항목 확인용
     console.log(checkedItems);
   }, [checkedItems]);
+
+  const handleDelete = () => { //동아리 지우는 함수
+    const updatedItems = Object.fromEntries(
+      Object.entries(checkedItems).filter(([key, value]) => !value) 
+      //체크되지 않은 항목만 선택하여 새로운 객체 반환
+    );
+    setCheckedItems(updatedItems);
+  };
+
+  const handleUpdate = () => {}
 
   return (
     <Container>
@@ -59,8 +69,8 @@ export default function ClubManagement() {
                 </CheckWrap>
 
                 <ButtonWrap>
-                  <HandleButton text="삭제" />
-                  <HandleButton text="수정" />
+                  <HandleButton text="삭제" onClick={handleDelete}/>
+                  <HandleButton text="수정" onClick={handleUpdate}/>
                 </ButtonWrap>
 
               </ClubWrap>

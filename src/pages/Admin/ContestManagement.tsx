@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Header from "../../components/HeaderAdmin";
 import PlusButton from "../../components/Button/PlusButton";
-import HandleButton from "../../components/Button/HandleButton";
+import HandleButton from "../../components/Button/ManagementButton";
 import { colors } from "../../styles/colors";
 
 /**

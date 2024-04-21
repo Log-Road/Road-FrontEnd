@@ -3,17 +3,18 @@ import styled from "styled-components";
 import { colors } from "../../styles/colors"
 
 /**
- * 어드민 페이지 버튼 (글보기, 수정, 시상, 삭제)
+ * 어드민 관리 페이지 버튼 (인원정보, 대회, 동아리 관리)
  */
 
 interface ButtonProps {
     text: string;
+    onClick: () => void
 }
 
-export default function HandleButton({ text }: ButtonProps) {
+export default function ManagementButton({ text, onClick }: ButtonProps) {
     return (
         <>
-            <Button text={text}>{text}</Button>
+            <Button text={text} onClick={onClick}>{text}</Button>
         </>
     )
 }

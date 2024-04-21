@@ -4,7 +4,7 @@ import { colors } from "../../styles/colors"
 import Header from "../../components/HeaderAdmin";
 import Search from "../../assets/Search.svg"
 import Upload from "../../assets/Upload.svg"
-import HandleButton from "../../components/Button/HandleButton";
+import HandleButton from "../../components/Button/ManagementButton";
 
 /**
  * 

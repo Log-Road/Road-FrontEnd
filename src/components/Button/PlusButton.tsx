@@ -4,7 +4,7 @@ import { colors } from "../../styles/colors"
 import Plus from "../../assets/Plus.svg"
 
 /**
- * 관리 페이지 추가 버튼
+ * 어드민 페이지 추가 버튼 (대회 추가, 동아리 추가)
  */
 
 interface ButtonProps {
