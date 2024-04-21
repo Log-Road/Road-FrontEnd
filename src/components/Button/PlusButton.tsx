@@ -9,11 +9,12 @@ import Plus from "../../assets/Plus.svg"
 
 interface ButtonProps {
     text: string;
+    onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
-export default function PlusButton({ text }: ButtonProps) {
+export default function PlusButton({ text, onClick }: ButtonProps) {
     return (
-        <Contents>
+        <Contents onClick={onClick}>
             <Icon src={Plus} />
             <Text>{text}</Text>
         </Contents>

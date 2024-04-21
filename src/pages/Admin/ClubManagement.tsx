@@ -4,6 +4,7 @@ import Header from "../../components/HeaderAdmin";
 import PlusButton from "../../components/Button/PlusButton";
 import HandleButton from "../../components/Button/HandleButton";
 import Checked from "../../assets/Checked.svg"
+import { useNavigate } from "react-router-dom";
 
 /**
  * 
@@ -11,6 +12,8 @@ import Checked from "../../assets/Checked.svg"
  */
 
 export default function ClubManagement() {
+
+  const navigate = useNavigate()
 
   const [checkedItems, setCheckedItems] = useState({}); //체크된 항목 저장
   const ClubData = [ //동아리 이름
@@ -37,7 +40,7 @@ export default function ClubManagement() {
 
           <TopWrap>
             <Title>동아리 관리</Title>
-            <PlusButton text="동아리 추가" />
+            <PlusButton text="동아리 추가" onClick={() => navigate("/clubAdd")}/>
           </TopWrap>
 
           <InfoWrap>
