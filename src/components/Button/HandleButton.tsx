@@ -26,6 +26,7 @@ justify-content: center;
 align-items: center;
 border: 0.1em solid ${(props) => props.text === "시상" ? colors.Main : props.text === "삭제" ? colors.Error : colors.gray1};
 border-radius: 0.63em;
+background-color: ${colors.White};
 color: ${(props) => props.text === "시상" ? colors.Main : props.text === "삭제" ? colors.Error : colors.gray2};
 font-family: 'Pretendard-Regular';
 font-size: 0.85em;

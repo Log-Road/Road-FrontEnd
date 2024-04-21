@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Header from "../../components/Header";
+import Header from "../../components/HeaderAdmin";
 import PlusButton from "../../components/Button/PlusButton";
 import HandleButton from "../../components/Button/HandleButton";
+import Checked from "../../assets/Checked.svg"
 
 /**
  * 
@@ -11,11 +12,21 @@ import HandleButton from "../../components/Button/HandleButton";
 
 export default function ClubManagement() {
 
-  const ClubData = [
-    { name: "Log" },
-    { name: "대동여지도" },
-    { name: "노네임드" },
+  const [checkedItems, setCheckedItems] = useState({}); //체크된 항목 저장
+  const ClubData = [ //동아리 이름
+    "DMS", "Gram", "Info", "Lift", "Log", "Modeep", "NoNamed", "Pick", "TeamQSS", "대동여지도", "어게인", "은하"
   ];
+
+  const toggleCheckbox = (value) => { //체크박스 상태 변경
+    setCheckedItems(prevState => ({
+      ...prevState,
+      [value]: !prevState[value]
+    }))
+  }
+
+  useEffect(() => { //체크된 항목 확인용
+    console.log(checkedItems);
+  }, [checkedItems]);
 
   return (
     <Container>
@@ -23,26 +34,36 @@ export default function ClubManagement() {
 
       <InnerContainer>
         <Contents>
+
           <TopWrap>
             <Title>동아리 관리</Title>
-            <PlusButton text="동아리 추가"/>
+            <PlusButton text="동아리 추가" />
           </TopWrap>
 
           <InfoWrap>
-            {ClubData.map((value, index) => (
-              <ClubWrap id={index}>
+            {ClubData.map((value) => (
+              <ClubWrap>
+
                 <CheckWrap>
-                  <input type="checkbox" />
-                  <p>{value.name}</p>
+                  <Input
+                    type="checkbox"
+                    id="checkClub"
+                    checked={checkedItems[value] || false}
+                    onChange={() => toggleCheckbox(value)}
+                  />
+                  {checkedItems[value] && <Icon src={Checked} />}
+                  <label htmlFor="checkClub">{value}</label>
                 </CheckWrap>
 
                 <ButtonWrap>
-                  <HandleButton text="삭제"/>
-                  <HandleButton text="수정"/>
+                  <HandleButton text="삭제" />
+                  <HandleButton text="수정" />
                 </ButtonWrap>
+
               </ClubWrap>
             ))}
           </InfoWrap>
+
         </Contents>
       </InnerContainer>
     </Container>
@@ -51,22 +72,18 @@ export default function ClubManagement() {
 
 const Container = styled.div`
   width: 100vw;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 1.25em;
+  height: 100vh;
 `;
 
 const InnerContainer = styled.div`
   width: 100%;
-  height: 100%;
+  height: 80%;
   display: flex;
   justify-content: center;
-  align-items: center;
 `;
 
 const Contents = styled.div`
-  width: 34.375%;
+  width: 40%;
   display: flex;
   flex-direction: column;
   gap: 2.5em;
@@ -97,9 +114,18 @@ const ButtonWrap = styled.div`
 `;
 
 const CheckWrap = styled.label`
+  position: relative;
   display: flex;
   gap: 1em;
 `;
+
+const Input = styled.input`
+zoom: 1.5;
+`
+
+const Icon = styled.img`
+  position: absolute;
+`
 
 const Title = styled.p`
   font-family: "Pretendard-Bold";
