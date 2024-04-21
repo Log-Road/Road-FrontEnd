@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import Header from "../../components/HeaderAdmin";
-import PlusButton from "../../components/Button/PlusButton";
-import HandleButton from "../../components/Button/ManagementButton";
-import { colors } from "../../styles/colors";
+import Header from "../../../components/HeaderAdmin";
+import PlusButton from "../../../components/Button/PlusButton";
+import { colors } from "../../../styles/colors";
 import { useNavigate } from "react-router-dom";
+import ShowButton from "./ShowButton";
 
 /**
  * 
@@ -25,12 +25,6 @@ export default function ContestManagement() {
     { title: "해커톤", startDate: "2023.2.14", overDate: "2023.03.14", state: "시상 완료" },
   ];
 
-  const showButton = (state) => { //대회 상태 (진행중/대기/완료)에 따라 나타나는 버튼 지정
-    if (state === "진행중") return <><HandleButton text="글보기" onClick={() => native("/")} /><HandleButton text="수정" onClick={() => native("/")} /></>;
-    else if (state === "시상 대기") return <><HandleButton text="글보기" onClick={() => native("/")} /><HandleButton text="시상" onClick={() => native("/")} /></>;
-    else if (state === "시상 완료") return <HandleButton text="결과" onClick={() => native("/")} />;
-  }
-
   return (
     <Container>
       <Header />
@@ -47,6 +41,7 @@ export default function ContestManagement() {
 
             {ContestData.map((value, index) => (
               <ContestWrap key={index}>
+                
                 <FlexWrap>
                   <Name>{value.title}</Name>
                   <Date>{value.startDate} ~ {value.overDate}</Date>
@@ -54,8 +49,9 @@ export default function ContestManagement() {
                 </FlexWrap>
                 
                 <FlexWrap>
-                  {showButton(value.state)}
+                  <ShowButton state={value.state} />
                 </FlexWrap>
+
               </ContestWrap>
             ))}
 

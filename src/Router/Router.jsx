@@ -15,7 +15,7 @@ import ClubManagement from "../pages/Admin/ClubManagement";
 import ClubAdd from "../pages/Admin/ClubAdd";
 import ClubUpdate from "../pages/Admin/ClubUpdate";
 import AwardAdd from "../pages/Admin/AwardAdd";
-import ContestManagement from "../pages/Admin/ContestManagement";
+import ContestManagement from "../pages/Admin/ContestManagement/ContestManagement";
 import ContestDetailsManagement from "../pages/Admin/ContestDetailsManagement";
 import AwardRegister from "../pages/Admin/AwardRegister";
 
