@@ -59,7 +59,7 @@ gap: 0.44em;
 `
 
 const Input = styled.input`
-width: 22.5em;
+width: 25vw;
 height: 3.38em;
 border: 0.08em solid ${colors.Gray["gray 200"]};
 border-radius: 0.75em;
