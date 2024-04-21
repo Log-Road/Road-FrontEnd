@@ -2,16 +2,12 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { colors } from "../../styles/colors";
 import Header from "../../components/HeaderAdmin";
-import BorderBtn from "../../components/Button/BorderBtn";
+import ActiveButton from "../../components/Button/ActiveButton";
 
 /**
  * 
- * @returns 동아리 이름 수정 페이지
+ * @returns 동아리 수정 페이지
  */
-
-interface AddProps {
-    possibleAdd : boolean
-}
 
 export default function ClubUpdate() {
 
@@ -33,9 +29,8 @@ export default function ClubUpdate() {
                     <SubTitle>동아리 수정</SubTitle>
                 </TopWrap>
 
-                <Input placeholder="동아리 이름" onChange={(e) => ChangeInput(e)}/>
-
-                <Button possibleAdd={possibleAdd}>동아리 수정</Button>
+                <Input placeholder="동아리 이름" value={clubName} onChange={(e) => ChangeInput(e)}/>
+                <ActiveButton text="동아리 수정" active={possibleAdd}/>
             </Contents>
         </Container>
     )
@@ -64,7 +59,7 @@ gap: 0.44em;
 `
 
 const Input = styled.input`
-width: 22.5em;
+width: 25vw;
 height: 3.38em;
 border: 0.08em solid ${colors.Gray["gray 200"]};
 border-radius: 0.75em;
@@ -76,24 +71,6 @@ font-size: 1em;
     border-color: ${colors.Main};
     outline: none;
   }
-`
-
-const Button = styled.button<AddProps>`
-width: 22.5em;
-height: 3.25em;
-border: none;
-border-radius: 0.75em;
-background-color: ${({ possibleAdd }) => possibleAdd ? colors.Main : colors.Gray["gray 200"]};
-color: ${({ possibleAdd }) => (possibleAdd ? "#fff" : colors.gray2)};
-display: flex;
-justify-content: center;
-align-items: center;
-font-family: 'Pretendard-Medium';
-font-size: 1em;
-
-&:hover {
-    background-color: ${({ possibleAdd }) => possibleAdd ? colors.Blue["main 600"] : colors.Gray["gray 300"]};
-}
 `
 
 const Title = styled.text`
