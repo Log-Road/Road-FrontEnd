@@ -14,7 +14,6 @@ import StudentInfoEdit from "../pages/Admin/StudentInfoEdit";
 import ClubManagement from "../pages/Admin/ClubManagement";
 import ClubAdd from "../pages/Admin/ClubAdd";
 import ClubUpdate from "../pages/Admin/ClubUpdate";
-import AwardAdd from "../pages/Admin/AwardAdd";
 import ContestManagement from "../pages/Admin/ContestManagement/ContestManagement";
 import ContestDetailsManagement from "../pages/Admin/ContestDetailsManagement";
 import AwardRegister from "../pages/Admin/AwardRegister";
@@ -37,7 +36,6 @@ export default function Router() {
         <Route path="/clubManagement" element={<ClubManagement/>} />
         <Route path="/clubAdd" element={<ClubAdd/>} />
         <Route path="/clubUpdate" element={<ClubUpdate/>} />
-        <Route path="/awardAdd" element={<AwardAdd/>} />
         <Route path="/contestManagement" element={<ContestManagement/>} />
         <Route path="/contestDetailsManagement" element={<ContestDetailsManagement/>} />
         <Route path="/awardRegister" element={<AwardRegister/>} />
