@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { colors } from "../../styles/colors"
 import Header from "../../components/HeaderAdmin";
@@ -15,6 +15,10 @@ interface StudentInfo {
     grade: number;
     classNumber: number;
     studentId: number;
+}
+
+interface ButtonProps {
+    possibleClick: boolean
 }
 
 export default function StudentInfoEdit() {
@@ -41,9 +45,10 @@ export default function StudentInfoEdit() {
         classNumber: 2,
         studentId: 16
     })
-    const [studentState, setStudentState] = useState<string>("재학생") //학생 상태 (재학, 졸업, 자퇴, 전학, 휴학
+    const [studentState, setStudentState] = useState<string>("재학생") //학생 상태 (재학, 졸업, 자퇴, 전학, 휴학)
     const [error, setError] = useState<boolean>(false) //에러발생 여부
     const [showOption, setShowOption] = useState<boolean>(false) //옵션창 보이는지 안보이는지 상태
+    const [possibleClick, setPossibleClick] = useState<boolean>(false) //완료 버튼 활성화 및 비활성화 상태
 
 
     const InputChange = (e: React.ChangeEvent<HTMLInputElement>): void => { //인풋창 값을 수정할 시 학생 정보가 변경됨
@@ -51,33 +56,37 @@ export default function StudentInfoEdit() {
 
         setStudentInfo({
             ...studentInfo,
-            [name]: value === "" ? "" : Number(value)
+            [name]: value === "" ? "" : value
         })
     }
 
-    const SelectChange = (selectedOption: string) : void => {
+    const SelectChange = (selectedOption: string) : void => { //option 값 변경시 상태 변경
         setStudentState(selectedOption)
         setShowOption(false)
     }
 
-    const ClickButton = () => {
-        const inputRegex = /^[0-20]*$/
+    useEffect(() => {
+        const inputRegex = /^[0-9]*$/;
         let hasError = false;
-        Object.values(studentInfo).forEach(function (value) { //학생 정보 값이 유효한지 확인 (비어있는가? 숫자인가?)
+
+        Object.values(studentInfo).forEach(function (value) { 
             setError(false)
             if (value === "") {
                 hasError = true
                 return console.log("빈공간")
             }
-            else if (!inputRegex.test(value)) {
+            else if (!inputRegex.test(value.toString())) {
                 hasError = true
                 return console.log("입력 형식이 올바르지 않습니다")
             }
         })
         setError(hasError)
+        setPossibleClick(!hasError)
+        
         console.log(studentInfo)
-        console.log(error)
-    }
+        console.log(hasError)
+
+    }, [studentInfo])
 
     return (
         <Container>
@@ -124,7 +133,7 @@ export default function StudentInfoEdit() {
 
                 <ButtonWrap>
                     <BackButton onClick={(e) => navigate("/informationPersonnel")}>뒤로가기</BackButton>
-                    <SuccessButton onClick={ClickButton}>완료</SuccessButton>
+                    <SuccessButton possibleClick={possibleClick}>완료</SuccessButton>
                 </ButtonWrap>
 
             </InnerContainer>
@@ -220,7 +229,7 @@ width: 25vw;
 height: 3.38em;
 `
 
-const BackButton = styled.div`
+const BackButton = styled.button`
 width: 48%;
 display: flex;
 justify-content: center;
@@ -228,6 +237,7 @@ align-items: center;
 border: 0.06em solid ${colors.gray1};
 border-radius: 0.75em;
 color: ${colors.gray2};
+background-color: ${colors.White};
 font-family: 'Pretendard-Bold';
 font-size: 1.13em;
 line-height: 140%;
@@ -237,21 +247,21 @@ line-height: 140%;
 }
 `
 
-const SuccessButton = styled.div`
+const SuccessButton = styled.button<ButtonProps>`
 width: 48%;
 display: flex;
 justify-content: center;
 align-items: center;
-border: 0.06em solid ${colors.Blue["main 600"]};
 border-radius: 0.75em;
-background-color: ${colors.Main};
-color: ${colors.White};
+border: 0.06em solid ${({possibleClick}) => possibleClick? colors.Main : colors.Gray["gray 200"]};
+background-color: ${({possibleClick}) => possibleClick? colors.Main : colors.Gray["gray 200"]};
+color: ${({possibleClick}) => possibleClick? colors.White : colors.Gray["gray 600"]};
 font-family: 'Pretendard-Bold';
 font-size: 1.13em;
 line-height: 140%;
 
 &:hover {
-    background-color: ${colors.Blue["main 600"]};
+    background-color: ${({possibleClick}) => possibleClick? colors.Blue["main 600"] : colors.Gray["gray 300"]};
 }
 `
 
