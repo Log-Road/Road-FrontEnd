@@ -30,6 +30,10 @@ align-items: center;
 gap: 2px;
 border: 1px solid ${colors.Gray["gray 200"]};
 border-radius: 12px;
+
+&:hover {
+    background-color: ${colors.Gray["gray 50"]};
+}
 `
 
 const Text = styled.p`
