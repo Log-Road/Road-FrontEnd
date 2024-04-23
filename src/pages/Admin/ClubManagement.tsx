@@ -31,6 +31,12 @@ export default function ClubManagement() {
     } 
     return setCheckedItems(prevItems => [...prevItems, value]);
   };
+
+  const sortItem = (array, checked) => { //요소 정렬 (체크된 요소는 밑으로 이동)
+    const checkedItems = array.filter(item => checked.includes(item));
+    const uncheckedItems = array.filter(item => !checked.includes(item));
+    return [...uncheckedItems, ...checkedItems]
+  }
   
   useEffect(() => { //확인용 콘솔
     console.log(checkedItems)
@@ -51,7 +57,8 @@ export default function ClubManagement() {
           </TopWrap>
 
           <InfoWrap>
-            {ClubData.map((value) => (
+            
+            {sortItem(ClubData, checkedItems).map((value) => (
               <ClubWrap key={value}>
 
                 <CheckWrap checked={checkedItems.includes(value)} >
