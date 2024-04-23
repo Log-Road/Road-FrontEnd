@@ -20,15 +20,27 @@ export default function AwardRegister() {
     const [openSelectIndex, setOpenSelectIndex] = useState<number | null>(null); //열린 selectBox 인덱스 저장 (아무것도 열린 option창이 없다면 null 저장)
 
     const SelectChange = (selectedOption: string, index: number): void => { //프로젝트 선택시 값 변경 
-        const newSelected = [...selectedProject];
-        newSelected[index] = selectedOption;
-        setSelectedProject(newSelected);
-        setOpenSelectIndex(null)
+            const newSelected = [...selectedProject];
+            newSelected[index] = selectedOption;
+            setSelectedProject(newSelected);
+            setOpenSelectIndex(null)
     };
 
     const toggleSelect = (index: number) => { //selectBox 열고 닫음
         setOpenSelectIndex(prevIndex => (prevIndex === index ? null : index));
     };
+
+    const clickRegister = () => { //완료버튼 클릭시 실행 (중복 & 누락된 값 있는지 체크)
+        console.log(selectedProject)
+        if(selectedProject.includes("프로젝트 선택")) {
+            console.log("값 선택을 안함~~")
+        }
+        else {
+            const duplicate = selectedProject.filter((value, index) => selectedProject.indexOf(value) !== index)
+            if(duplicate.length > 0) console.log("중복 값이 있음~~")
+            else console.log("완벽합니당")
+        }
+    }
 
     return (
         <Container>
@@ -73,7 +85,7 @@ export default function AwardRegister() {
 
                         <ButtonWrap>
                             <Button>수정</Button>
-                            <Button>등록</Button>
+                            <Button onClick={clickRegister}>등록</Button>
                         </ButtonWrap>
                     </Content>
                 </Wrap>
