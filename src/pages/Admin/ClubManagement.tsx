@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { colors } from "../../styles/colors";
 import Header from "../../components/HeaderAdmin";
 import PlusButton from "../../components/Button/PlusButton";
 import HandleButton from "../../components/Button/ManagementButton";
@@ -10,6 +11,10 @@ import { useNavigate } from "react-router-dom";
  * 
  * @returns 동아리 관리 페이지
  */
+
+interface Props {
+  checked: boolean;
+}
 
 export default function ClubManagement() {
 
@@ -31,14 +36,7 @@ export default function ClubManagement() {
     console.log(checkedItems);
   }, [checkedItems]);
 
-  const handleDelete = () => { //동아리 지우는 함수
-    const updatedItems = Object.fromEntries(
-      Object.entries(checkedItems).filter(([key, value]) => !value) 
-      //체크되지 않은 항목만 선택하여 새로운 객체 반환
-    );
-    setCheckedItems(updatedItems);
-  };
-
+  const handleDelete = () => {}
   const handleUpdate = () => {}
 
   return (
@@ -55,7 +53,7 @@ export default function ClubManagement() {
 
           <InfoWrap>
             {ClubData.map((value) => (
-              <ClubWrap>
+              <ClubWrap key={value} checked={checkedItems[value]}>
 
                 <CheckWrap>
                   <Input
@@ -114,11 +112,13 @@ const InfoWrap = styled.div`
   gap: 1.75em;
 `;
 
-const ClubWrap = styled.div`
+const ClubWrap = styled.div<Props>`
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 0.63em;
+  ${({ checked }) => checked ? "text-decoration: line-through;" : ""}
+  ${({ checked }) => checked ? `color: ${colors.gray2};` : ""}
 `;
 
 const ButtonWrap = styled.div`
