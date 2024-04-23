@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { colors } from "../../styles/colors";
 import Header from "../../components/HeaderAdmin";
@@ -20,21 +20,21 @@ export default function ClubManagement() {
 
   const navigate = useNavigate()
 
-  const [checkedItems, setCheckedItems] = useState({}); //체크된 항목 저장
+  const [checkedItems, setCheckedItems] = useState<string[]>([]); //체크된 항목 저장
   const ClubData = [ //동아리 이름
     "DMS", "Gram", "Info", "Lift", "Log", "Modeep", "NoNamed", "Pick", "TeamQSS", "대동여지도", "어게인", "은하"
   ];
 
-  const toggleCheckbox = (value) => { //체크박스 상태 변경
-    setCheckedItems(prevState => ({
-      ...prevState,
-      [value]: !prevState[value]
-    }))
-  }
-
-  useEffect(() => { //체크된 항목 확인용
-    console.log(checkedItems);
-  }, [checkedItems]);
+  const toggleCheckbox = (value) => {
+    if (checkedItems.includes(value)) {
+      return setCheckedItems(prevItems => prevItems.filter(item => item !== value));
+    } 
+    return setCheckedItems(prevItems => [...prevItems, value]);
+  };
+  
+  useEffect(() => {
+    console.log(checkedItems)
+  }, )
 
   const handleDelete = () => {}
   const handleUpdate = () => {}
@@ -42,7 +42,6 @@ export default function ClubManagement() {
   return (
     <Container>
       <Header />
-
       <InnerContainer>
         <Contents>
 
@@ -53,16 +52,15 @@ export default function ClubManagement() {
 
           <InfoWrap>
             {ClubData.map((value) => (
-              <ClubWrap key={value} checked={checkedItems[value]}>
+              <ClubWrap key={value}>
 
-                <CheckWrap>
+                <CheckWrap checked={checkedItems.includes(value)} >
                   <Input
                     type="checkbox"
                     id="checkClub"
-                    checked={checkedItems[value] || false}
                     onChange={() => toggleCheckbox(value)}
                   />
-                  {checkedItems[value] && <Icon src={Checked} />}
+                  {checkedItems.includes(value) && <Icon src={Checked} />}
                   <label htmlFor="checkClub">{value}</label>
                 </CheckWrap>
 
@@ -112,13 +110,11 @@ const InfoWrap = styled.div`
   gap: 1.75em;
 `;
 
-const ClubWrap = styled.div<Props>`
+const ClubWrap = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 0.63em;
-  ${({ checked }) => checked ? "text-decoration: line-through;" : ""}
-  ${({ checked }) => checked ? `color: ${colors.gray2};` : ""}
 `;
 
 const ButtonWrap = styled.div`
@@ -126,10 +122,12 @@ const ButtonWrap = styled.div`
   gap: 0.75em;
 `;
 
-const CheckWrap = styled.label`
+const CheckWrap = styled.label<Props>`
   position: relative;
   display: flex;
   gap: 1em;
+  ${({ checked }) => checked ? "text-decoration: line-through;" : ""}
+  ${({ checked }) => checked ? `color: ${colors.gray2};` : ""}
 `;
 
 const Input = styled.input`
