@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { colors } from "../../styles/colors";
 import Header from "../../components/HeaderAdmin";
@@ -19,16 +19,15 @@ interface Props {
 export default function ClubManagement() {
 
   const navigate = useNavigate()
+  const ClubData = [ "DMS", "Gram", "Info", "Lift", "Log", "Modeep", "NoNamed", "Pick", "TeamQSS", "대동여지도", "어게인", "은하"];
 
   const [checkedItems, setCheckedItems] = useState<string[]>([]); //체크된 항목 저장
-  const ClubData = [ //동아리 이름
-    "DMS", "Gram", "Info", "Lift", "Log", "Modeep", "NoNamed", "Pick", "TeamQSS", "대동여지도", "어게인", "은하"
-  ];
+  const [clubItems, setClubItems] = useState<string[]>(ClubData)
 
   const toggleCheckbox = (value) => { //요소 체크박스 선택 및 제거
     if (checkedItems.includes(value)) {
       return setCheckedItems(prevItems => prevItems.filter(item => item !== value));
-    } 
+    }
     return setCheckedItems(prevItems => [...prevItems, value]);
   };
 
@@ -37,13 +36,15 @@ export default function ClubManagement() {
     const uncheckedItems = array.filter(item => !checked.includes(item));
     return [...uncheckedItems, ...checkedItems]
   }
-  
-  useEffect(() => { //확인용 콘솔
-    console.log(checkedItems)
-  }, )
 
-  const handleDelete = () => {}
-  const handleUpdate = () => {}
+  const handleDelete = (value) => { //삭제 버튼 클릭
+    setClubItems(prevItems => prevItems.filter(item => item !== value)); 
+    setCheckedItems(prevItems => prevItems.filter(item => item !== value));
+  }
+
+  const handleUpdate = () => { //수정 버튼 클릭
+    navigate("/clubUpdate")
+  }
 
   return (
     <Container>
@@ -53,12 +54,12 @@ export default function ClubManagement() {
 
           <TopWrap>
             <Title>동아리 관리</Title>
-            <PlusButton text="동아리 추가" onClick={() => navigate("/clubAdd")}/>
+            <PlusButton text="동아리 추가" onClick={() => navigate("/clubAdd")} />
           </TopWrap>
 
           <InfoWrap>
-            
-            {sortItem(ClubData, checkedItems).map((value) => (
+
+            {sortItem(clubItems, checkedItems).map((value) => (
               <ClubWrap key={value}>
 
                 <CheckWrap checked={checkedItems.includes(value)} >
@@ -72,8 +73,8 @@ export default function ClubManagement() {
                 </CheckWrap>
 
                 <ButtonWrap>
-                  <HandleButton text="삭제" onClick={handleDelete}/>
-                  <HandleButton text="수정" onClick={handleUpdate}/>
+                  <HandleButton text="삭제" onClick={() => handleDelete(value)} />
+                  <HandleButton text="수정" onClick={handleUpdate} />
                 </ButtonWrap>
 
               </ClubWrap>
