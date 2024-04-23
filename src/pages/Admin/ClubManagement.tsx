@@ -25,14 +25,14 @@ export default function ClubManagement() {
     "DMS", "Gram", "Info", "Lift", "Log", "Modeep", "NoNamed", "Pick", "TeamQSS", "대동여지도", "어게인", "은하"
   ];
 
-  const toggleCheckbox = (value) => {
+  const toggleCheckbox = (value) => { //요소 체크박스 선택 및 제거
     if (checkedItems.includes(value)) {
       return setCheckedItems(prevItems => prevItems.filter(item => item !== value));
     } 
     return setCheckedItems(prevItems => [...prevItems, value]);
   };
   
-  useEffect(() => {
+  useEffect(() => { //확인용 콘솔
     console.log(checkedItems)
   }, )
 
