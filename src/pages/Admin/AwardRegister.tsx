@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { colors } from "../../styles/colors";
 import Header from "../../components/HeaderAdmin";
@@ -7,8 +7,9 @@ import DownArrow from "../../assets/DownArrow.svg"
 
 export default function AwardRegister() {
 
-    const AwardData = ["금상", "은상", "동상", "인기상", "KOSA-MIDASIT 해커톤 우수상"] //시상할 상 목록
-    const OptionData = [ //option 값
+    const ContestProjectMap = ["2024 해커톤", "웹프로그래밍 수행", "대덕SW대회"] //대회 이름 (가져오기)
+    const AwardData = ["금상", "은상", "동상", "인기상", "KOSA-MIDASIT 해커톤 우수상"] //시상할 상 목록 (가져오기)
+    const OptionData = [ //option 값 (가져오기)
         { projectName: "ROAD" },
         { projectName: "프로젝트명입니다" },
         { projectName: "대마고프로젝트명명" },
@@ -16,28 +17,35 @@ export default function AwardRegister() {
         { projectName: "프로젝트이름" },
     ]
 
+    const [selectedContestIndex, setSelectedContestIndex] = useState<number | null>(0); //선택된 대회 인덱스 저장
     const [selectedProject, setSelectedProject] = useState<string[]>(Array(AwardData.length).fill("프로젝트 선택")); //선택된 프로젝트 저장
     const [openSelectIndex, setOpenSelectIndex] = useState<number | null>(null); //열린 selectBox 인덱스 저장 (아무것도 열린 option창이 없다면 null 저장)
 
-    const SelectChange = (selectedOption: string, index: number): void => { //프로젝트 선택시 값 변경 
-            const newSelected = [...selectedProject];
-            newSelected[index] = selectedOption;
-            setSelectedProject(newSelected);
-            setOpenSelectIndex(null)
+
+    const SelectChange = (selectedOption: string, index: number): void => { //option 프로젝트 선택시 값 변경 
+        const newSelected = [...selectedProject];
+        newSelected[index] = selectedOption;
+        setSelectedProject(newSelected);
+        setOpenSelectIndex(null)
     };
 
     const toggleSelect = (index: number) => { //selectBox 열고 닫음
         setOpenSelectIndex(prevIndex => (prevIndex === index ? null : index));
     };
 
+    const handleContestClick = (index: number) => { //대회 선택
+        setSelectedContestIndex(index)
+        setOpenSelectIndex(null);
+    }
+
     const clickRegister = () => { //완료버튼 클릭시 실행 (중복 & 누락된 값 있는지 체크)
         console.log(selectedProject)
-        if(selectedProject.includes("프로젝트 선택")) {
+        if (selectedProject.includes("프로젝트 선택")) {
             console.log("값 선택을 안함~~")
         }
         else {
             const duplicate = selectedProject.filter((value, index) => selectedProject.indexOf(value) !== index)
-            if(duplicate.length > 0) console.log("중복 값이 있음~~")
+            if (duplicate.length > 0) console.log("중복 값이 있음~~")
             else console.log("완벽합니당")
         }
     }
@@ -55,8 +63,15 @@ export default function AwardRegister() {
                         </TopWrap>
 
                         <ContestWrap>
-                            <ContestName>뭐라뭐라 대회</ContestName>
-                            <ContestName>대회 이름</ContestName>
+                            {ContestProjectMap.map((value, index) => (
+                                <ContestName
+                                    key={index}
+                                    onClick={() => handleContestClick(index)}
+                                    style={{ color: selectedContestIndex === index ? "Black" : `${colors.gray1}` }}
+                                >
+                                    {value}
+                                </ContestName>
+                            ))}
                         </ContestWrap>
 
                         {AwardData.map((value, index) => (
