@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { colors } from "../../styles/colors";
 import Header from "../../components/HeaderAdmin";
@@ -7,6 +7,7 @@ import DownArrow from "../../assets/DownArrow.svg"
 
 export default function AwardRegister() {
 
+    //백엔드에서 값을 어떻게 주는지 모르겠음 (알잘딱하게 코드 변경하셈)
     const ContestProjectMap = ["2024 해커톤", "웹프로그래밍 수행", "대덕SW대회"] //대회 이름 (가져오기)
     const AwardData = ["금상", "은상", "동상", "인기상", "KOSA-MIDASIT 해커톤 우수상"] //시상할 상 목록 (가져오기)
     const OptionData = [ //option 값 (가져오기)
@@ -20,6 +21,7 @@ export default function AwardRegister() {
     const [selectedContestIndex, setSelectedContestIndex] = useState<number | null>(0); //선택된 대회 인덱스 저장
     const [selectedProject, setSelectedProject] = useState<string[]>(Array(AwardData.length).fill("프로젝트 선택")); //선택된 프로젝트 저장
     const [openSelectIndex, setOpenSelectIndex] = useState<number | null>(null); //열린 selectBox 인덱스 저장 (아무것도 열린 option창이 없다면 null 저장)
+    const [fixedValue, setFixedValue] = useState<boolean>(false) //프로젝트 값 고정 여부 
 
 
     const SelectChange = (selectedOption: string, index: number): void => { //option 프로젝트 선택시 값 변경 
@@ -30,7 +32,7 @@ export default function AwardRegister() {
     };
 
     const toggleSelect = (index: number) => { //selectBox 열고 닫음
-        setOpenSelectIndex(prevIndex => (prevIndex === index ? null : index));
+        if(!fixedValue) setOpenSelectIndex(prevIndex => (prevIndex === index ? null : index));
     };
 
     const handleContestClick = (index: number) => { //대회 선택
@@ -38,7 +40,11 @@ export default function AwardRegister() {
         setOpenSelectIndex(null);
     }
 
-    const clickRegister = () => { //완료버튼 클릭시 실행 (중복 & 누락된 값 있는지 체크)
+    const handleUpdateButton = () => { //수정버튼 클릭 시 실행
+        setFixedValue(false)
+    }
+
+    const handleRegisterButton = () => { //완료버튼 클릭시 실행 (중복 & 누락된 값 있는지 체크)
         console.log(selectedProject)
         if (selectedProject.includes("프로젝트 선택")) {
             console.log("값 선택을 안함~~")
@@ -46,7 +52,10 @@ export default function AwardRegister() {
         else {
             const duplicate = selectedProject.filter((value, index) => selectedProject.indexOf(value) !== index)
             if (duplicate.length > 0) console.log("중복 값이 있음~~")
-            else console.log("완벽합니당")
+            else {
+                console.log("완벽합니당")
+                setFixedValue(true)
+            }
         }
     }
 
@@ -99,8 +108,8 @@ export default function AwardRegister() {
                         ))}
 
                         <ButtonWrap>
-                            <Button>수정</Button>
-                            <Button onClick={clickRegister}>등록</Button>
+                            <Button onClick={handleUpdateButton}>수정</Button>
+                            <Button onClick={handleRegisterButton}>등록</Button>
                         </ButtonWrap>
                     </Content>
                 </Wrap>
