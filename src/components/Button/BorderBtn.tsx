@@ -1,15 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import { colors } from "../../styles/colors"
+import { colors } from "../../styles/colors";
 
 interface BorderBtnProps {
   text: string;
+  onClick?: () => void;
 }
 
-export default function BorderBtn({text} : BorderBtnProps) {
+export default function BorderBtn({text, onClick} : BorderBtnProps) {
   return (
     <>
-      <Btn>{text}</Btn>
+      <Btn onClick={onClick}>{text}</Btn>
     </>
   )
 }

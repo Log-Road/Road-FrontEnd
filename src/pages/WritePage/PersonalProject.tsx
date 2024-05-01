@@ -1,146 +1,202 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { colors } from "../../styles/colors";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Header from "../../components/Header";
 import BottomBtn from "../../components/Button/BottomBtn";
-import Add from "../../assets/Add.svg";
-import Cancel from "../../assets/Cancel.svg";
+import TagInput from "../../components/PersonalProject/TagInput";
+import ImgPreview from "../../components/PersonalProject/ImgPreview";
+import SimpleIntroText from "../../components/PersonalProject/SimpleIntroText";
+import Select from "react-select";
+
 
 export default function PersonalProject() {
-    const textareaRef = useRef<HTMLTextAreaElement>(null);
-    const [tags, setTags] = useState<string[]>([]);
-    const [inputValue, setInputValue] = useState<string>("");
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const queryParamValue = queryParams.get('param');
+    const [selectOnline, setSelectOnline] = useState<string | null>(null);
+    const [btnDisabled, setBtnDisabled] = useState<boolean>(true);
+    const [projectTitle, setProjectTitle] = useState<string>("");
+    const [projectImg, setProjectImg] = useState<string>("");
+    const [userName, setUserName] = useState<string>("");
+    const [TeamName, setTeamName] = useState<string>("");
+    const [TeamMembers, setTeamMembers] = useState<boolean>(false);
+    const [techStack, setTechStack] = useState<boolean>(false);
+    const [simpleIntroText, setSimpleIntroText] = useState<string>("");
+    
+    // select 의 option 값
+    const online = [
+        { value: "DMS", label: "DMS" },
+        { value: "대동여지도", label: "대동여지도" },
+        { value: "그램", label: "그램" },
+        { value: "LOG", label: "LOG" },
+        { value: "은하", label: "은하" },
+        { value: "Pick", label: "Pick" },
+        { value: "QSS", label: "QSS" },
+        { value: "NoNamed", label: "NoNamed" },
+        { value: "Modeep", label: "Modeep" },
+        { value: "리프트", label: "리프트" },
+        { value: "어게인", label: "어게인" },
+        { value: "Info", label: "Info" },
+    ];
 
     useEffect(() => {
-        adjustTextareaHeight();
-    }, []);
-
-    const adjustTextareaHeight = () => {
-        if (textareaRef.current) {
-            textareaRef.current.style.height = "auto";
-            textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+        // 조건이 충족되면 버튼 활성화
+        if (projectTitle && projectImg && techStack && simpleIntroText) {
+            const isDisabled =
+                (queryParamValue === '개인' && userName) ||
+                (queryParamValue === '팀' && TeamName && TeamMembers) ||
+                (queryParamValue === '동아리' && selectOnline); 
+                
+                setBtnDisabled(!isDisabled);
         }
-    };
+    }, [queryParamValue, projectTitle, projectImg, userName, TeamName, TeamMembers, selectOnline, techStack, simpleIntroText]);
+    
+    const navigate = useNavigate();
 
-    const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        console.log(inputValue);
-        if (e.key === "Enter" && inputValue.trim() !== "") {
-
-            e.preventDefault();
-            handleAddTag();
-        }
-    };
-
-    // 태그 생성
-    const handleAddTag = () => {
-        const trimmedValue = inputValue.trim();
-        if (trimmedValue) {
-            setTags([...tags, inputValue]);
-            setInputValue("");
-        }
-    };
-    // 태그 지우기
-    const handleRemoveTag = (index: number) => {
-        const updatedTags = [...tags];
-        updatedTags.splice(index, 1);
-        setTags(updatedTags);
-    };
+    const handleButtonClick = () => {
+        navigate(`/markdown`);
+    }
 
     return (
         <>
             <Header />
             <Body>
                 <Container>
-                    <Title>요약 소개글</Title>
-                    <Content>
-                        <Label>제목</Label>
-                        <Input placeholder="프로젝트 제목" />
-                    </Content>
-                    <Content>
-                        <Label>썸네일 이미지</Label>
-                        <form>
-                            <ImgFileLabel>
-                                <ImgFile type="file"  multiple accept="image/*"></ImgFile>
-                            </ImgFileLabel>
-                        </form>
-                        
-
-                    </Content>
-                    <Content>
-                        <Label>이름</Label>
-                        <Input placeholder="이름" />
-                    </Content>
-                    <StackBox>
+                    <MainTitle>요약 소개글</MainTitle>
+                    <MainWrapper>
                         <Content>
-                            <Label>기술 스택</Label>
-                            <AddInputBox>
-                                <AddBtn src={Add} onClick={handleAddTag} />
-                                <AddInput
-                                    placeholder="기술 스택 추가"
-                                    value={inputValue}
-                                    onChange={(e) => setInputValue(e.target.value)}
-                                    onKeyDown={handleInputKeyDown}
-                                />
-                            </AddInputBox>
+                            <SubTitle>제목</SubTitle>
+                            <Input 
+                                placeholder="프로젝트 제목" 
+                                value={projectTitle} 
+                                onChange={(e) => setProjectTitle(e.target.value)} 
+                            />
+
                         </Content>
-                        <TagBox>
-                            {tags.map((tag, index) => (
-                                <Tag key={index}>
-                                    {tag}
-                                    <CancelBtn src={Cancel} onClick={() => handleRemoveTag(index)} />
-                                </Tag>
-                            ))}
-                        </TagBox>
-                    </StackBox>
-                    <Content>
-                        <Label>간단한 소개글</Label>
-                        <SubText
-                            placeholder="프로젝트 내용을 간단히 서술(150자)"
-                            rows={1}
-                            maxLength={150}
-                            onInput={adjustTextareaHeight}
-                            ref={textareaRef}
-                        ></SubText>
-                    </Content>
+                        <ThumbnailContent>
+                            <ImgPreview
+                                text="썸네일 이미지"
+                                onChange={(imgData) => setProjectImg(imgData)}
+                            />
+                        </ThumbnailContent>
+                        {queryParamValue === '개인' &&
+                            (
+                                <Content>
+                                    <SubTitle>이름</SubTitle>
+                                    <Input 
+                                        placeholder="이름"
+                                        value={userName} 
+                                        onChange={(e) => setUserName(e.target.value)}
+                                    />
+                                </Content>
+                            )
+                        }
+                        {queryParamValue === '팀' &&
+                            (
+                                <>
+                                    <Content>
+                                        <SubTitle>팀</SubTitle>
+                                        <Input 
+                                            placeholder="팀 이름" 
+                                            value={TeamName}
+                                            onChange={(e) => setTeamName(e.target.value)}
+                                        />
+                                    </Content>
+                                    <TagInput
+                                        text='팀원'
+                                        placeholder='팀원 추가'
+                                        onChange={(tags) => setTeamMembers(tags)}
+                                    />
+                                </>
+                            )
+                        }
+                        {queryParamValue === '동아리' &&
+                            (
+                                <>
+                                    <Content>
+                                        <SubTitle>동아리</SubTitle>
+                                        <GroupSelectBox>
+                                            <StyledSelect
+                                                options={online}
+                                                onChange={(value: any) => setSelectOnline(value)}
+                                                placeholder='동아리를 선택해주세요'
+                                            />
+                                        </GroupSelectBox>
+
+                                    </Content>
+                                </>
+                            )
+                        }
+                        <TagInput
+                            text='주요 기술 스택'
+                            placeholder='기술 스택 추가'
+                            onChange={(tags) => setTechStack(tags)}
+                        />
+                        <IntroContent>
+                            <SimpleIntroText
+                                text='간단한 소개글'
+                                onChange={(value) => setSimpleIntroText(value)}
+                            />
+                        </IntroContent>
+                    </MainWrapper>
                 </Container>
             </Body>
-            <BottomBtn text="다음" />
+            <BottomBtn text="다음" disabled={btnDisabled} onClick={handleButtonClick}/>
+
+
+
         </>
     );
 }
 
+
+
+
 const Body = styled.div`
     display: flex;
     justify-content: center;
-`;
+    padding: 30px 0 160px;
+    @media (max-width: 648px) {
+    & {
+        padding-bottom: 120px;
+    }
+    }
+`
 
-const Container = styled.div`
-    background-color: ${colors.White};
-    width: 45%;
+const Container = styled.main`
+    background-color: ${colors.White}; 
+    width: 595px;
     padding: 26px 24px;
     border-radius: 16px;
     display: flex;
     flex-direction: column;
     gap: 24px;
-    width: 595px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     @media (max-width: 648px) {
     & {
         width: 100%;
     }
-}
-`;
+    }
+`
 
-const Title = styled.p`
+const MainTitle = styled.p`
     font-weight: 500;
-    font-size: 18px;
+    font-size: 1.1em;
     @media (max-width: 648px) {
     & {
-       font-size: 22px;
+    font-size: 1.4em;
     }
     }
-`;
+`
+const MainWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+`
 
-const Content = styled.div`
+const Content = styled.section`
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -152,16 +208,16 @@ const Content = styled.div`
         gap: 10px;
     }
     }
-`;
+`
 
-const Label = styled.p`
-    font-size: 16px;
+const SubTitle = styled.p`
+    font-size: 1em;
     @media (max-width: 648px) {
     & {
-       font-size: 17px;
+    font-size: 1.07em;
     }
     }
-`;
+`
 
 const Input = styled.input`
     border: none;
@@ -171,6 +227,7 @@ const Input = styled.input`
     width: 80%;
     font-size: 16px;
     outline: none;
+    color: ${colors.Black};
     &::placeholder {
         color: ${colors.gray2};
     }
@@ -179,108 +236,102 @@ const Input = styled.input`
         width: 100%;
     }
     }
-`;
-
-const AddInputBox = styled.div`
-    border-radius: 12px;
-    background-color: ${colors.Gray["gray 50"]};
-    padding: 8px 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 80%;
-    @media (max-width: 648px) {
-    & {
-        width: 100%;
-    }
-    }
-`;
-
-const AddInput = styled.input`
-    border: none;
-    background-color: transparent;
-    font-size: 16px;
-    outline: none;
-    &::placeholder {
-        color: ${colors.gray2};
-    }
-    @media (max-width: 648px) {
-    & {
-        width: 100%;
-    }
-    }
-`;
-
-const AddBtn = styled.img`
-    width: 26px;
-    margin-bottom: 2px;
-    border-radius: 50%;
-
-    &:hover {
-        background-color: ${colors.Gray["gray 100"]};
-    }
-`;
-
-const SubText = styled.textarea`
-    border-radius: 12px;
-    background-color: ${colors.Gray["gray 50"]};
-    padding: 13px 16px;
-    width: 80%;
-    border: none;
-    font-size: 16px;
-    resize: none;
-    outline: none;
-    overflow-y: hidden;
-    &::placeholder {
-        color: ${colors.gray2};
-    }
-    @media (max-width: 648px) {
-    & {
-        width: 100%;
-    }
-    }
-`;
-
-const TagBox = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    padding-left: 20%;
-    gap: 10px;
-    @media (max-width: 648px) {
-    & {
-        padding: 0;
-    }
-    }
-`;
-
-const Tag = styled.div`
-    display: inline-block;
-    padding: 8px 33px 8px 15px;
-    color: ${colors.Main};
-    border-radius: 12px;
-    border: 1px solid ${colors.Main};
-    background-color: ${colors.White};
-    font-size: 16px;
-    align-items: center;
-    position: relative;
-`;
-
-const StackBox = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-`;
-
-const CancelBtn = styled.img`
-    width: 17px;
-    position: absolute;
-    right: 10px;
-`;
-
-const ImgFile = styled.input`
-    display: none;
 `
-const ImgFileLabel = styled.label`
-    width: 80px;
-    background-color: red;
+
+const ThumbnailContent = styled.section`
+    display: flex;
+    align-items: center;
+    gap: 21px;
+
+
+    @media (max-width: 648px) {
+    & {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        gap: 10px;
+    }
+    }
+`
+
+const IntroContent = styled.section`
+    display: flex;
+    justify-content: space-between;
+    @media (max-width: 648px) {
+    & {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        gap: 10px;
+    }
+    }
+`
+
+const StyledSelect = styled(Select).attrs({
+    classNamePrefix: 'react-select',
+})`
+ 
+  .react-select__indicator-separator {
+    background-color: ${colors.Gray["gray 50"]};
+    
+  }
+    .react-select__control {
+      background-color: ${colors.White};
+      padding-left: 8px;
+      border: 1px solid ${colors.Gray["gray 100"]};
+      border-radius: 12px;
+      display: flex;
+      height: 45.5px;
+      box-shadow: none;
+      cursor: pointer;
+      &:hover {
+        border: 1px solid ${colors.Gray["gray 200"]};
+      }
+      
+      
+      
+    }
+    .react-select__single-value {
+      font-size: 16px;
+    }
+    .react-select__menu {
+      background-color: #ffffff;
+      border-radius: 12px;
+      padding: 10px 10px 5px 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      box-shadow: none;
+      color: ${colors.Gray["gray 900"]};
+      border: 1px solid ${colors.Gray["gray 100"]};
+      &::-webkit-scrollbar {
+        border: none;
+      }
+    }
+    .react-select__option {
+        background-color: ${colors.White};
+        border-radius: 4px;
+ 
+        margin-bottom: 5px;
+      &:hover {
+        background-color: ${colors.Gray["gray 50"]};
+        border:none;
+      }
+    }
+    .react-select__option--is-selected {
+      background-color: ${colors.Gray["gray 100"]}; //클릭된 option 배경색
+      color: ${colors.Black};
+      &:hover {
+        background-color: ${colors.Gray["gray 100"]};
+      }
+    }
+ `;
+
+
+
+const GroupSelectBox = styled.div`
+    width: 80%;
+    @media (max-width: 648px) {
+    & {
+        width: 100%;
+    }
+    }
 `
