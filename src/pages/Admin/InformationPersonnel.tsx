@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { colors } from "../../styles/colors"
-import Header from "../../components/Header";
+import Header from "../../components/HeaderAdmin";
 import Search from "../../assets/Search.svg"
 import Upload from "../../assets/Upload.svg"
-import UpdateButton from "../../components/Button/HandleButton"
+import HandleButton from "../../components/Button/ManagementButton";
+import { useNavigate } from "react-router-dom";
 
 /**
  * 
@@ -12,12 +13,21 @@ import UpdateButton from "../../components/Button/HandleButton"
  */
 
 export default function InformationPersonnel() {
+
+    const navigate = useNavigate()
+
+    const studentData = [ //백엔드에서 받아올 학생 정보
+        { name: "삐덕이", studentId: "2학년 2반 17번", state: "재학중" },
+        { name: "홍길동", studentId: "2학년 1반 11번", state: "유급" },
+        { name: "신사임당", studentId: "3학년 1반 11번", state: "졸업" },
+    ]
+
     return (
         <Container>
             <Header />
             <InnerContainer>
                 <Contents>
-                    
+
                     <Title>인원 정보 및 관리</Title>
 
                     <SearchWrap>
@@ -37,14 +47,16 @@ export default function InformationPersonnel() {
                     </FileUploadWrap>
 
                     <InfoWrap>
-                        <FlexWrap>
-                            <StudentInfoWrap>
-                                <Name>홍길동</Name>
-                                <StudentID>1학년 1반 11번</StudentID>
-                                <State>재학중</State>
-                            </StudentInfoWrap>
-                            <UpdateButton/>
-                        </FlexWrap>
+                        {studentData.map((value, index) => (
+                            <FlexWrap>
+                                <StudentInfoWrap>
+                                    <Name>{value.name}</Name>
+                                    <StudentID>{value.studentId}</StudentID>
+                                    <State>{value.state}</State>
+                                </StudentInfoWrap>
+                                <HandleButton text="수정" onClick={() => navigate("/")}/>
+                            </FlexWrap>
+                        ))}
                     </InfoWrap>
 
                 </Contents>
@@ -54,31 +66,31 @@ export default function InformationPersonnel() {
 }
 
 const Container = styled.div`
-width: 100%;
-height: 100%;
-display: flex;
-flex-direction: column;
-gap: 1.25em;
+width: 100vw;
+height: 100vh;
 `
 
 const InnerContainer = styled.div`
-width: 100%;
-height: 100%;
 display: flex;
 justify-content: center;
-align-items: center;
 `
 
 const Contents = styled.div`
-display: flex;
-flex-direction: column;
-gap: 1.25em;
-`
+    width: 40%;
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25em;
+
+    @media screen and (max-width: 768px) {
+        width: 70%;
+    }
+`;
 
 const SearchWrap = styled.div`
 position: relative;
-width: 37.5em;
-height: 3.5em;
+width: 100%;
 `
 
 const FileUploadWrap = styled.div`
@@ -100,7 +112,7 @@ gap: 1.75em;
 `
 
 const FlexWrap = styled.div`
-width: 35em;
+width: 100%;
 display: flex;
 justify-content: space-between;
 `

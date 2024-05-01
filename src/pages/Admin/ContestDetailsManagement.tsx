@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { colors } from "../../styles/colors";
 import Header from "../../components/HeaderAdmin";
@@ -6,19 +6,11 @@ import ActiveButton from "../../components/Button/ActiveButton"
 
 /**
  * 
- * @returns 동아리 추가 페이지
+ * @returns 대회 상세 정보 관리 페이지
  */
 
-export default function ClubAdd() {
+export default function ContestDetailsManagement() {
 
-    const [clubName, setClubName] = useState<string>("") //동아리 이름 저장
-    const [possibleAdd, setPossibleAdd] = useState<boolean>(false) //버튼 활성화 여부
-
-    const ChangeInput = (e) => { //입력시 값 변경
-        setClubName(e.target.value)
-        setPossibleAdd(e.target.value !== "");
-    }
-    
     return (
         <Container>
             <Header />
@@ -26,11 +18,18 @@ export default function ClubAdd() {
             <Contents>
                 <TopWrap>
                     <Title>ROAD</Title>
-                    <SubTitle>동아리 추가</SubTitle>
+                    <SubTitle>대회 상세 정보 관리</SubTitle>
                 </TopWrap>
 
-                <Input placeholder="동아리 이름" value={clubName} onChange={(e) => ChangeInput(e)}/>
-                <ActiveButton text="동아리 추가" active={possibleAdd}/>
+                <ContentWrap>
+                    <Input placeholder="동아리 이름" />
+                    <DateInputWrap>
+                        <DateInput type="date" id="startDate" />
+                        <DateInput type="date" id="lastDate" />
+                    </DateInputWrap>
+                </ContentWrap>
+
+                <ActiveButton text="완료" active={false} />
             </Contents>
         </Container>
     )
@@ -58,14 +57,41 @@ align-items: center;
 gap: 0.44em;
 `
 
-const Input = styled.input`
+const ContentWrap = styled.div`
 width: 25vw;
+display: flex;
+flex-direction: column;
+gap: 0.5em;
+`
+
+const DateInputWrap = styled.div`
+display: flex;
+justify-content: space-between;
+`
+
+const Input = styled.input`
+width: 100%;
 height: 3.38em;
 border: 0.08em solid ${colors.Gray["gray 200"]};
 border-radius: 0.75em;
 padding: 0 1.5em;
 font-family: 'Pretendard-Regular';
 font-size: 1em;
+
+&:focus {
+    border-color: ${colors.Main};
+    outline: none;
+  }
+`
+
+const DateInput = styled.input`
+    width: 48%;
+    height: 3.38em;
+    border: 0.08em solid ${colors.Gray["gray 200"]};
+    border-radius: 0.75em;
+    padding: 0 1.5em;
+    font-family: 'Pretendard-Regular';
+    font-size: 1em;
 
 &:focus {
     border-color: ${colors.Main};

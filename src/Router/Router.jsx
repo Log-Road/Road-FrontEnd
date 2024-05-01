@@ -13,12 +13,15 @@ import InformationPersonnel from "../pages/Admin/InformationPersonnel";
 import StudentInfoEdit from "../pages/Admin/StudentInfoEdit";
 import ClubManagement from "../pages/Admin/ClubManagement";
 import ClubAdd from "../pages/Admin/ClubAdd";
+import ClubUpdate from "../pages/Admin/ClubUpdate";
+import ContestManagement from "../pages/Admin/ContestManagement/ContestManagement";
+import ContestDetailsManagement from "../pages/Admin/ContestDetailsManagement";
+import AwardRegister from "../pages/Admin/AwardRegister";
 import TeacherPage from "../pages/TeacherPage"
 import Personnel from "../pages/WritePage/Personnel";
 import PersonalProject from "../pages/WritePage/PersonalProject";
 import MarkDown from "../pages/WritePage/MarkDown";
 import SelectEvent from "../pages/WritePage/SelectEvent";
-
 
 export default function Router() {
   return (
@@ -44,6 +47,10 @@ export default function Router() {
         <Route path="/studentInfoEdit" element={<StudentInfoEdit/>} />
         <Route path="/clubManagement" element={<ClubManagement/>} />
         <Route path="/clubAdd" element={<ClubAdd/>} />
+        <Route path="/clubUpdate" element={<ClubUpdate/>} />
+        <Route path="/contestManagement" element={<ContestManagement/>} />
+        <Route path="/contestDetailsManagement" element={<ContestDetailsManagement/>} />
+        <Route path="/awardRegister" element={<AwardRegister/>} />
       </Routes>
     </BrowserRouter>
   );
