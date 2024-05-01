@@ -1,13 +1,18 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import RankingPage from "../pages/RankingPage"
+import RankingPage from "../pages/RankingPage";
 import Main from "../pages/Main";
 import Login from "../pages/Login";
 import SelectUser from "../pages/SelectUser";
 import FindId from "../pages/FindID";
-import FindPassWord from "../pages/FindPassWord"
-import ChangePassWord from "../pages/ChangePassWord"
-
+import FindPassWord from "../pages/FindPassWord";
+import ChangePassWord from "../pages/ChangePassWord";
+import ChangeEmail from "../pages/ChangeEmail";
+import ChangeStudentID from "../pages/ChangeStudentID";
+import InformationPersonnel from "../pages/Admin/InformationPersonnel";
+import StudentInfoEdit from "../pages/Admin/StudentInfoEdit";
+import ClubManagement from "../pages/Admin/ClubManagement";
+import ClubAdd from "../pages/Admin/ClubAdd";
 import TeacherPage from "../pages/TeacherPage"
 import Personnel from "../pages/WritePage/Personnel";
 import PersonalProject from "../pages/WritePage/PersonalProject";
@@ -20,7 +25,7 @@ export default function Router() {
     <BrowserRouter>
       <Routes>
         <Route path="/main" element={<Main />} />
-        <Route path="/ranking" element={<RankingPage/>}/>
+        <Route path="/ranking" element={<RankingPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/selectuser" element={<SelectUser />} />
         <Route path="/teacher" element={<TeacherPage />} />
@@ -29,8 +34,17 @@ export default function Router() {
         <Route path="/personnel" element={<PersonalProject/>} />
         <Route path="/markdown" element={<MarkDown/>} />
         <Route path="/selectEvent" element={<SelectEvent/>} />
-
+        <Route path="/selectUser" element={<SelectUser />} />
+        <Route path="/findID" element={<FindId />} />
+        <Route path="/findPassWord" element={<FindPassWord />} />
+        <Route path="/changePassWord" element={<ChangePassWord />} />
+        <Route path="/changeEmail" element={<ChangeEmail />} />
+        <Route path="/changeStudentID" element={<ChangeStudentID />} />
+        <Route path="/informationPersonnel" element={<InformationPersonnel />}/>
+        <Route path="/studentInfoEdit" element={<StudentInfoEdit/>} />
+        <Route path="/clubManagement" element={<ClubManagement/>} />
+        <Route path="/clubAdd" element={<ClubAdd/>} />
       </Routes>
     </BrowserRouter>
-  )
-}      
+  );
+}

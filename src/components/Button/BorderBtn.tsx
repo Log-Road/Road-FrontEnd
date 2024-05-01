@@ -7,10 +7,10 @@ interface BorderBtnProps {
   onClick?: () => void;
 }
 
-export default function BorderBtn({text, onClick} : BorderBtnProps) {
+export default function BorderBtn({text} : BorderBtnProps) {
   return (
     <>
-      <Btn onClick={onClick}>{text}</Btn>
+      <Btn>{text}</Btn>
     </>
   )
 }
@@ -20,12 +20,14 @@ const Btn = styled.button`
   font-weight: 700;
   color: ${colors.Main};
   border-radius: 12px;
-  border: 1px solid ${colors.Main}; // 고침 1px
+  border: 1px solid ${colors.Main}; 
   background-color: transparent;
 
-  &:hover { // 만듦
+  &:hover { 
     background-color: ${colors.Main};
     color: ${colors.White};
   }
-  
+  border: 0.5px solid ${colors.Main};
+  background-color: transparent;
+
 `
