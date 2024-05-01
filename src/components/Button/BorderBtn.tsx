@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import {colors} from "../../styles/colors"
+import { colors } from "../../styles/colors";
 
 interface BorderBtnProps {
   text: string;
+  onClick?: () => void;
 }
 
 export default function BorderBtn({text} : BorderBtnProps) {
@@ -19,6 +20,14 @@ const Btn = styled.button`
   font-weight: 700;
   color: ${colors.Main};
   border-radius: 12px;
+  border: 1px solid ${colors.Main}; 
+  background-color: transparent;
+
+  &:hover { 
+    background-color: ${colors.Main};
+    color: ${colors.White};
+  }
   border: 0.5px solid ${colors.Main};
   background-color: transparent;
+
 `
