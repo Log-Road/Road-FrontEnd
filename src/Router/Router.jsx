@@ -13,6 +13,12 @@ import InformationPersonnel from "../pages/Admin/InformationPersonnel";
 import StudentInfoEdit from "../pages/Admin/StudentInfoEdit";
 import ClubManagement from "../pages/Admin/ClubManagement";
 import ClubAdd from "../pages/Admin/ClubAdd";
+import TeacherPage from "../pages/TeacherPage"
+import Personnel from "../pages/WritePage/Personnel";
+import PersonalProject from "../pages/WritePage/PersonalProject";
+import MarkDown from "../pages/WritePage/MarkDown";
+import SelectEvent from "../pages/WritePage/SelectEvent";
+
 
 export default function Router() {
   return (
@@ -21,6 +27,13 @@ export default function Router() {
         <Route path="/main" element={<Main />} />
         <Route path="/ranking" element={<RankingPage />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/selectuser" element={<SelectUser />} />
+        <Route path="/teacher" element={<TeacherPage />} />
+        <Route path="/find" element={<FindId/>}/>
+        <Route path="/write/personnel" element={<Personnel/>} />
+        <Route path="/personnel" element={<PersonalProject/>} />
+        <Route path="/markdown" element={<MarkDown/>} />
+        <Route path="/selectEvent" element={<SelectEvent/>} />
         <Route path="/selectUser" element={<SelectUser />} />
         <Route path="/findID" element={<FindId />} />
         <Route path="/findPassWord" element={<FindPassWord />} />

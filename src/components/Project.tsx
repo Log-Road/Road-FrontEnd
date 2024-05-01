@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from "styled-components";
 import ProjectImg from "../assets/ProjectImg.svg"
-import Profile from "../assets/Profile.svg"
+import Profile from "../assets/ProjectImg.svg"
 import { colors } from "../styles/colors"
 
 /**
